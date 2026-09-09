@@ -563,6 +563,65 @@ footer {
     color: #9d536c;
 }
 
+    /* =========================
+   THINGS I NEVER SAY ENOUGH
+========================= */
+
+.things-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 25px;
+    max-width: 950px;
+    margin: auto;
+}
+
+.thing-card {
+    background: white;
+    padding: 35px 25px;
+    border-radius: 22px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.thing-card::before {
+    content: "♥";
+    position: absolute;
+    font-size: 100px;
+    right: -25px;
+    bottom: -45px;
+    opacity: 0.035;
+    transition: 0.4s;
+}
+
+.thing-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 18px 35px rgba(184,77,107,0.15);
+}
+
+.thing-card:hover::before {
+    transform: scale(1.3) rotate(10deg);
+}
+
+.thing-card span {
+    font-size: 42px;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.thing-card h3 {
+    color: #a84763;
+    margin-bottom: 15px;
+    font-size: 21px;
+}
+
+.thing-card p {
+    line-height: 1.7;
+    font-size: 16px;
+}
+
 /* =========================
    MOBILE
 ========================= */
@@ -977,41 +1036,89 @@ Me — five years later ❤️
      SONG
 ========================= -->
 
-<section id="song" class="reveal">
+<section id="things" class="reveal">
 
     <h2 class="section-title">
-        A Song for you 🎵
+        Things I Never Say Enough ❤️
     </h2>
 
-    <div class="song-box">
+    <div class="things-grid">
 
-        <div class="music-heart">
-            🎵❤️🎵
+        <div class="thing-card">
+            <span>❤️</span>
+            <h3>I'm Proud of You</h3>
+            <p>
+                I may not always say it, but I genuinely admire
+                how you handle things and keep going.
+            </p>
         </div>
 
-        <br>
+        <div class="thing-card">
+            <span>🌸</span>
+            <h3>You Make Things Better</h3>
+            <p>
+                Somehow even ordinary days feel a little more
+                special when you're part of them.
+            </p>
+        </div>
 
-        <h3>Perfect — Ed Sheeran</h3>
+        <div class="thing-card">
+            <span>😊</span>
+            <h3>I Love Your Smile</h3>
+            <p>
+                Your smile has this unfair ability to completely
+                change my mood.
+            </p>
+        </div>
 
-        <br>
+        <div class="thing-card">
+            <span>🤍</span>
+            <h3>Thank You</h3>
+            <p>
+                Thank you for being patient with me, understanding me,
+                and simply being there.
+            </p>
+        </div>
 
-        <p>
-            Yes you are Perfect for me. ❤️
-        </p>
+        <div class="thing-card">
+            <span>🫶</span>
+            <h3>You Matter to Me</h3>
+            <p>
+                More than I probably manage to put into words,
+                you genuinely matter to me.
+            </p>
+        </div>
 
-        <br>
+        <div class="thing-card">
+            <span>💭</span>
+            <h3>I Think About You</h3>
+            <p>
+                More often than you probably realise.
+                Sometimes it's the smallest thing that reminds me of you.
+            </p>
+        </div>
 
-        <a
-            href="https://www.youtube.com/watch?v=2Vv-BfVoq4g"
-            target="_blank"
-            class="start-btn">
-            ▶ Play the Song
-        </a>
+        <div class="thing-card">
+            <span>🌙</span>
+            <h3>I Feel Lucky</h3>
+            <p>
+                Out of all the people in the world,
+                somehow our paths crossed. And I'm really glad they did.
+            </p>
+        </div>
+
+        <div class="thing-card">
+            <span>♾️</span>
+            <h3>I Choose You</h3>
+            <p>
+                Not just on the easy days.
+                I choose you on the complicated ones too.
+            </p>
+        </div>
 
     </div>
 
 </section>
-
 
 <!-- =========================
      FINAL SURPRISE
