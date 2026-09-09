@@ -359,7 +359,384 @@ section {
 .timeline-item h3 {
     margin: 10px 0;
 }
+/* =========================
+   PIECE BY PIECE PUZZLE
+========================= */
 
+.puzzle-intro {
+    text-align: center;
+    font-size: 18px;
+    line-height: 1.8;
+    margin-bottom: 35px;
+    color: #666;
+}
+
+.puzzle-wrapper {
+    max-width: 850px;
+    margin: auto;
+    text-align: center;
+}
+
+.puzzle-progress {
+    margin-bottom: 18px;
+}
+
+#puzzleProgress {
+    display: inline-block;
+    background: white;
+    padding: 10px 22px;
+    border-radius: 30px;
+    font-weight: bold;
+    color: #a84763;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.06);
+}
+
+
+/* Puzzle Board */
+
+.puzzle-board {
+    position: relative;
+    width: 360px;
+    height: 360px;
+    margin: 0 auto 25px;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+
+    gap: 7px;
+
+    padding: 8px;
+
+    background: #f8dfe7;
+    border-radius: 24px;
+
+    box-shadow:
+        0 15px 40px rgba(168,71,99,0.12);
+}
+
+
+/* Empty Slots */
+
+.puzzle-slot {
+    border: 2px dashed rgba(168,71,99,0.25);
+    border-radius: 14px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: rgba(168,71,99,0.3);
+
+    transition: all 0.3s ease;
+}
+
+.puzzle-slot span {
+    font-size: 14px;
+}
+
+.puzzle-slot.highlight {
+    background: rgba(255,255,255,0.6);
+    border-color: #b84d6b;
+    transform: scale(1.03);
+}
+
+.puzzle-slot.correct {
+    background: #fff;
+    border-color: #b84d6b;
+}
+
+
+/* Completed Heart */
+
+.completed-heart {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%) scale(0);
+
+    font-size: 145px;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition: all 0.6s cubic-bezier(.17,.67,.35,1.4);
+}
+
+.completed-heart.show {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+
+    animation: heartCelebrate 1.2s ease infinite alternate;
+}
+
+@keyframes heartCelebrate {
+
+    from {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    to {
+        transform: translate(-50%, -50%) scale(1.12);
+    }
+
+}
+
+
+/* Hint */
+
+.puzzle-hint {
+    color: #888;
+    margin-bottom: 25px;
+    font-size: 15px;
+}
+
+
+/* Puzzle Pieces */
+
+.puzzle-pieces {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 15px;
+
+    max-width: 700px;
+
+    margin: auto;
+}
+
+.puzzle-piece {
+    height: 85px;
+
+    background: white;
+
+    border-radius: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
+
+    color: #a84763;
+
+    cursor: grab;
+
+    user-select: none;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,0.08);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.puzzle-piece:hover {
+    transform: translateY(-6px) rotate(-2deg);
+
+    box-shadow:
+        0 15px 30px rgba(168,71,99,0.15);
+}
+
+.puzzle-piece:active {
+    cursor: grabbing;
+    transform: scale(0.95);
+}
+
+.puzzle-piece span {
+    font-size: 15px;
+}
+
+
+/* Correctly placed piece */
+
+.puzzle-piece.placed {
+    position: absolute;
+
+    margin: 0;
+
+    width: calc(25% - 5px);
+    height: calc(50% - 5px);
+
+    background: white;
+
+    border-radius: 14px;
+
+    cursor: default;
+
+    box-shadow: none;
+
+    z-index: 5;
+
+    transform: none !important;
+}
+
+.puzzle-piece.placed span {
+    opacity: 0.85;
+}
+
+
+/* Wrong placement */
+
+.puzzle-piece.wrong {
+    animation: puzzleShake 0.4s ease;
+}
+
+@keyframes puzzleShake {
+
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-8px);
+    }
+
+    50% {
+        transform: translateX(8px);
+    }
+
+    75% {
+        transform: translateX(-5px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+
+}
+
+
+/* Final message */
+
+.puzzle-final {
+    max-width: 650px;
+
+    margin: 60px auto 0;
+
+    text-align: center;
+
+    opacity: 0;
+
+    transform: translateY(30px);
+
+    pointer-events: none;
+
+    display: none;
+}
+
+.puzzle-final.show {
+    display: block;
+
+    animation: finalReveal 1.2s ease forwards;
+}
+
+@keyframes finalReveal {
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+.final-heart {
+    font-size: 100px;
+
+    animation:
+        finalHeartPop 1s cubic-bezier(.17,.67,.35,1.4) forwards;
+}
+
+@keyframes finalHeartPop {
+
+    0% {
+        transform: scale(0);
+    }
+
+    70% {
+        transform: scale(1.25);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
+}
+
+.puzzle-final h2 {
+    color: #a84763;
+
+    font-size: 38px;
+
+    margin: 15px 0;
+}
+
+.puzzle-final p {
+    font-size: 18px;
+
+    line-height: 1.8;
+
+    color: #666;
+}
+
+.final-line {
+    margin-top: 25px;
+
+    font-size: 17px;
+
+    line-height: 1.8;
+
+    color: #777;
+}
+
+.final-line strong {
+    color: #a84763;
+    font-size: 20px;
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .puzzle-board {
+        width: 300px;
+        height: 300px;
+    }
+
+    .puzzle-pieces {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        padding: 0 15px;
+    }
+
+    .puzzle-piece {
+        height: 75px;
+    }
+
+    .puzzle-piece span {
+        font-size: 13px;
+    }
+
+    .completed-heart {
+        font-size: 115px;
+    }
+
+    .puzzle-final h2 {
+        font-size: 30px;
+    }
+
+    .puzzle-intro {
+        font-size: 16px;
+        padding: 0 15px;
+    }
+
+}
 /* =========================
    MEMORY PLACEHOLDERS
 ========================= */
@@ -667,7 +1044,7 @@ footer {
     <a href="#home">Home</a>
     <a href="#open">Open When</a>
     <a href="#story">Our Story</a>
-    <a href="#memories">Memories</a>
+    <a href="#memories">Piece By Piece</a>
     <a href="#future">Future</a>
     <a href="#song">Our Song</a>
     <a href="#final">❤️</a>
@@ -826,56 +1203,126 @@ footer {
 <section id="memories" class="reveal">
 
     <h2 class="section-title">
-        Our Memories 📸
+        Piece by Piece 🧩❤️
     </h2>
 
-    <div class="gallery">
+    <p class="puzzle-intro">
+        Every little moment became a piece of us. ❤️
+        <br>
+        Can you put them all back together?
+    </p>
 
-        <div class="photo-card">
-            <div class="photo-placeholder">
-                <img src="photos/01.jpg" alt="Our first favourite picture">
-            </div>
-            <p>Our first favourite picture ❤️</p>
+    <div class="puzzle-wrapper">
+
+        <div class="puzzle-progress">
+            <span id="puzzleProgress">0 / 8 pieces</span>
         </div>
 
-        <div class="photo-card">
-            <div class="photo-placeholder">
-                <img src="photos/02.jpg" alt="A memory I'll never forget">
+        <div class="puzzle-board" id="puzzleBoard">
+
+            <div class="puzzle-slot" data-slot="1">
+                <span>1</span>
             </div>
-            <p>A memory I'll never forget 💕</p>
+
+            <div class="puzzle-slot" data-slot="2">
+                <span>2</span>
+            </div>
+
+            <div class="puzzle-slot" data-slot="3">
+                <span>3</span>
+            </div>
+
+            <div class="puzzle-slot" data-slot="4">
+                <span>4</span>
+            </div>
+
+            <div class="puzzle-slot" data-slot="5">
+                <span>5</span>
+            </div>
+
+            <div class="puzzle-slot" data-slot="6">
+                <span>6</span>
+            </div>
+
+            <div class="puzzle-slot" data-slot="7">
+                <span>7</span>
+            </div>
+
+            <div class="puzzle-slot" data-slot="8">
+                <span>8</span>
+            </div>
+
+            <div class="completed-heart" id="completedHeart">
+                ❤️
+            </div>
+
         </div>
 
-        <div class="photo-card">
-            <div class="photo-placeholder">
-                <img src="photos/03.jpg" alt="One of my favourite days with you">
-            </div>
-            <p>One of my favourite days with you 🌸</p>
-        </div>
+        <p class="puzzle-hint" id="puzzleHint">
+            Drag the pieces into their matching places 💕
+        </p>
 
-        <div class="photo-card">
-            <div class="photo-placeholder">
-                <img src="photos/04.jpg" alt="That smile">
-            </div>
-            <p>That smile ❤️</p>
-        </div>
+        <div class="puzzle-pieces" id="puzzlePieces">
 
-        <div class="photo-card">
-            <div class="photo-placeholder">
-                <img src="photos/05.jpg" alt="One for the memory book">
+            <div class="puzzle-piece" draggable="true" data-piece="1">
+                <span>YOU</span>
             </div>
-            <p>One for the memory book 📖</p>
-        </div>
 
-        <div class="photo-card">
-            <div class="photo-placeholder">
-                <img src="photos/06.jpg" alt="More memories">
+            <div class="puzzle-piece" draggable="true" data-piece="2">
+                <span>&</span>
             </div>
-            <p>More memories coming... 💗</p>
+
+            <div class="puzzle-piece" draggable="true" data-piece="3">
+                <span>ME</span>
+            </div>
+
+            <div class="puzzle-piece" draggable="true" data-piece="4">
+                <span>❤️</span>
+            </div>
+
+            <div class="puzzle-piece" draggable="true" data-piece="5">
+                <span>LAUGHS</span>
+            </div>
+
+            <div class="puzzle-piece" draggable="true" data-piece="6">
+                <span>DREAMS</span>
+            </div>
+
+            <div class="puzzle-piece" draggable="true" data-piece="7">
+                <span>US</span>
+            </div>
+
+            <div class="puzzle-piece" draggable="true" data-piece="8">
+                <span>∞</span>
+            </div>
+
         </div>
 
     </div>
 
 
+    <!-- Final Message -->
+
+    <div class="puzzle-final" id="puzzleFinal">
+
+        <div class="final-heart">
+            ❤️
+        </div>
+
+        <h2>I Love You.</h2>
+
+        <p>
+            And just like these pieces,
+            every little moment brought us here.
+        </p>
+
+        <div class="final-line">
+            Piece by piece. Moment by moment.
+            <br>
+            <strong>Us. ❤️</strong>
+        </div>
+
+    </div>
 
 </section>
 
@@ -1461,6 +1908,284 @@ function showSecret() {
     for (let i = 0; i < 35; i++) {
 
         setTimeout(createHeart, i * 80);
+
+    }
+
+}
+    /* =========================
+   PIECE BY PIECE PUZZLE
+========================= */
+
+const puzzlePieces = document.querySelectorAll(".puzzle-piece");
+const puzzleSlots = document.querySelectorAll(".puzzle-slot");
+
+const puzzleProgress =
+    document.getElementById("puzzleProgress");
+
+const puzzleHint =
+    document.getElementById("puzzleHint");
+
+const completedHeart =
+    document.getElementById("completedHeart");
+
+const puzzleFinal =
+    document.getElementById("puzzleFinal");
+
+let completedPieces = 0;
+let draggedPiece = null;
+
+
+/* -------------------------
+   DESKTOP DRAG
+------------------------- */
+
+puzzlePieces.forEach(piece => {
+
+    piece.addEventListener("dragstart", function(e) {
+
+        draggedPiece = this;
+
+        this.style.opacity = "0.5";
+
+        e.dataTransfer.setData(
+            "text/plain",
+            this.dataset.piece
+        );
+
+    });
+
+    piece.addEventListener("dragend", function() {
+
+        this.style.opacity = "1";
+
+        puzzleSlots.forEach(slot => {
+            slot.classList.remove("highlight");
+        });
+
+    });
+
+});
+
+
+puzzleSlots.forEach(slot => {
+
+    slot.addEventListener("dragover", function(e) {
+
+        e.preventDefault();
+
+        if (!this.classList.contains("correct")) {
+            this.classList.add("highlight");
+        }
+
+    });
+
+
+    slot.addEventListener("dragleave", function() {
+
+        this.classList.remove("highlight");
+
+    });
+
+
+    slot.addEventListener("drop", function(e) {
+
+        e.preventDefault();
+
+        this.classList.remove("highlight");
+
+        if (!draggedPiece) return;
+
+        const pieceNumber =
+            draggedPiece.dataset.piece;
+
+        const slotNumber =
+            this.dataset.slot;
+
+
+        if (pieceNumber === slotNumber) {
+
+            placePiece(
+                draggedPiece,
+                this
+            );
+
+        } else {
+
+            wrongPiece(draggedPiece);
+
+        }
+
+        draggedPiece = null;
+
+    });
+
+});
+
+
+/* -------------------------
+   PLACE CORRECT PIECE
+------------------------- */
+
+function placePiece(piece, slot) {
+
+    if (slot.classList.contains("correct")) {
+        return;
+    }
+
+    const board =
+        document.getElementById("puzzleBoard");
+
+    const slotRect =
+        slot.getBoundingClientRect();
+
+    const boardRect =
+        board.getBoundingClientRect();
+
+
+    piece.classList.add("placed");
+
+    piece.style.left =
+        (slotRect.left - boardRect.left) + "px";
+
+    piece.style.top =
+        (slotRect.top - boardRect.top) + "px";
+
+
+    board.appendChild(piece);
+
+    slot.classList.add("correct");
+
+    completedPieces++;
+
+
+    puzzleProgress.innerText =
+        completedPieces + " / 8 pieces";
+
+
+    /* Little celebration */
+
+    piece.animate(
+        [
+            { transform: "scale(0.7)" },
+            { transform: "scale(1.12)" },
+            { transform: "scale(1)" }
+        ],
+        {
+            duration: 450,
+            easing: "ease-out"
+        }
+    );
+
+
+    if (completedPieces === 8) {
+
+        finishPuzzle();
+
+    }
+
+}
+
+
+/* -------------------------
+   WRONG PIECE
+------------------------- */
+
+function wrongPiece(piece) {
+
+    piece.classList.remove("wrong");
+
+    void piece.offsetWidth;
+
+    piece.classList.add("wrong");
+
+}
+
+
+/* -------------------------
+   PUZZLE COMPLETE
+------------------------- */
+
+function finishPuzzle() {
+
+    puzzleHint.innerHTML =
+        "You put us back together. ❤️";
+
+
+    setTimeout(() => {
+
+        completedHeart.classList.add("show");
+
+    }, 300);
+
+
+    setTimeout(() => {
+
+        puzzleFinal.classList.add("show");
+
+        createPuzzleHearts();
+
+    }, 1200);
+
+}
+
+
+/* -------------------------
+   HEART CELEBRATION
+------------------------- */
+
+function createPuzzleHearts() {
+
+    for (let i = 0; i < 25; i++) {
+
+        const heart =
+            document.createElement("div");
+
+        heart.innerHTML =
+            ["❤️", "💕", "💗", "💖"][Math.floor(Math.random() * 4)];
+
+        heart.style.position = "fixed";
+
+        heart.style.left =
+            Math.random() * 100 + "vw";
+
+        heart.style.bottom = "-30px";
+
+        heart.style.fontSize =
+            (15 + Math.random() * 25) + "px";
+
+        heart.style.pointerEvents = "none";
+
+        heart.style.zIndex = "9999";
+
+        document.body.appendChild(heart);
+
+
+        const animation =
+            heart.animate(
+                [
+                    {
+                        transform: "translateY(0) rotate(0deg)",
+                        opacity: 1
+                    },
+                    {
+                        transform:
+                            `translateY(-${window.innerHeight + 100}px)
+                             rotate(${Math.random() * 360}deg)`,
+                        opacity: 0
+                    }
+                ],
+                {
+                    duration:
+                        2500 + Math.random() * 2000,
+
+                    easing: "ease-out"
+                }
+            );
+
+
+        animation.onfinish = () => {
+            heart.remove();
+        };
 
     }
 
