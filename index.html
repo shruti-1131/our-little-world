@@ -1,0 +1,661 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Our Little World ❤️</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Georgia, 'Times New Roman', serif;
+            background: linear-gradient(135deg, #fff0f5, #ffe4ec, #fff7fa);
+            color: #4a2632;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 25px 18px 60px;
+        }
+
+        /* HERO */
+
+        .hero {
+            text-align: center;
+            padding: 70px 20px 50px;
+        }
+
+        .heart {
+            font-size: 55px;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.15);
+            }
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin: 20px 0 12px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            line-height: 1.7;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .subtitle {
+            margin-top: 15px;
+            font-style: italic;
+            opacity: 0.8;
+        }
+
+        /* SECTION */
+
+        .section {
+            margin-top: 35px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 30px;
+            margin-bottom: 25px;
+        }
+
+        .section-description {
+            text-align: center;
+            margin-bottom: 30px;
+            line-height: 1.7;
+        }
+
+        /* CARDS */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            padding: 25px 20px;
+            text-align: center;
+            cursor: pointer;
+            border: 1px solid rgba(180, 80, 110, 0.15);
+            box-shadow: 0 8px 25px rgba(120, 40, 70, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(120, 40, 70, 0.15);
+        }
+
+        .card-icon {
+            font-size: 35px;
+            margin-bottom: 12px;
+        }
+
+        .card h3 {
+            font-size: 18px;
+        }
+
+        .tap {
+            margin-top: 10px;
+            font-size: 12px;
+            opacity: 0.6;
+        }
+
+        /* MESSAGE MODAL */
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            inset: 0;
+            background: rgba(45, 15, 25, 0.65);
+            padding: 20px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: #fff8fb;
+            max-width: 650px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            border-radius: 25px;
+            padding: 35px 28px;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+            animation: appear 0.3s ease;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(25px) scale(0.97);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .close {
+            position: absolute;
+            right: 18px;
+            top: 12px;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        .modal h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 26px;
+        }
+
+        .message {
+            line-height: 1.9;
+            font-size: 16px;
+            white-space: pre-line;
+        }
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+            margin-top: 70px;
+            opacity: 0.7;
+            line-height: 1.7;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            .hero {
+                padding-top: 45px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                padding: 30px 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="heart">❤️</div>
+
+        <h1>Our Little World</h1>
+
+        <p>
+            I could have bought you something...
+            but I wanted to make something that exists
+            only for you.
+        </p>
+
+        <p class="subtitle">
+            So here's a little piece of my heart.
+        </p>
+
+    </section>
+
+
+    <!-- OPEN WHEN -->
+
+    <section class="section">
+
+        <h2 class="section-title">
+            💌 Open When...
+        </h2>
+
+        <p class="section-description">
+            You don't have to open them all at once.
+            Save them for the moments when you need them. ❤️
+        </p>
+
+
+        <div class="cards">
+
+            <div class="card" onclick="openMessage(0)">
+                <div class="card-icon">🥺</div>
+                <h3>You Miss Me</h3>
+                <div class="tap">Tap to open</div>
+            </div>
+
+            <div class="card" onclick="openMessage(1)">
+                <div class="card-icon">🫂</div>
+                <h3>You Need a Hug</h3>
+                <div class="tap">Tap to open</div>
+            </div>
+
+            <div class="card" onclick="openMessage(2)">
+                <div class="card-icon">😔</div>
+                <h3>You're Having a Bad Day</h3>
+                <div class="tap">Tap to open</div>
+            </div>
+
+            <div class="card" onclick="openMessage(3)">
+                <div class="card-icon">😡</div>
+                <h3>You're Angry With Me</h3>
+                <div class="tap">Tap to open</div>
+            </div>
+
+            <div class="card" onclick="openMessage(4)">
+                <div class="card-icon">🌙</div>
+                <h3>You Can't Sleep</h3>
+                <div class="tap">Tap to open</div>
+            </div>
+
+            <div class="card" onclick="openMessage(5)">
+                <div class="card-icon">🥺</div>
+                <h3>You Feel Like Giving Up</h3>
+                <div class="tap">Tap to open</div>
+            </div>
+
+            <div class="card" onclick="openMessage(6)">
+                <div class="card-icon">❤️</div>
+                <h3>You Want to Know Why I Love You</h3>
+                <div class="tap">Tap to open</div>
+            </div>
+
+            <div class="card" onclick="openMessage(7)">
+                <div class="card-icon">😂</div>
+                <h3>You Need to Smile</h3>
+                <div class="tap">Tap to open</div>
+            </div>
+
+            <div class="card" onclick="openMessage(8)">
+                <div class="card-icon">📸</div>
+                <h3>You Want to Remember Us</h3>
+                <div class="tap">Tap to open</div>
+            </div>
+
+            <div class="card" onclick="openMessage(9)">
+                <div class="card-icon">💍</div>
+                <h3>You Wonder About Our Future</h3>
+                <div class="tap">Tap to open</div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <footer>
+
+        Made with ❤️, especially for you.
+
+        <br>
+
+        <span>More memories coming soon...</span>
+
+    </footer>
+
+</div>
+
+
+<!-- MESSAGE MODAL -->
+
+<div class="modal" id="messageModal">
+
+    <div class="modal-content">
+
+        <span class="close" onclick="closeMessage()">×</span>
+
+        <h2 id="messageTitle"></h2>
+
+        <div class="message" id="messageText"></div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const messages = [
+
+{
+    title: "🥺 Open When You Miss Me",
+    text: `Hey you ❤️
+
+If you're reading this, I guess you miss me.
+
+Well… I miss you too. Probably more than I'll admit.
+
+Close your eyes for a second and imagine I'm right there beside you, annoying you, making you laugh, and probably asking, "Why are you looking at me like that?" 😂
+
+Until I can actually be there, consider this a tiny virtual hug from me.
+
+And remember — distance doesn't change the fact that you're my person.
+
+Now stop missing me and come talk to me. ❤️`
+},
+
+{
+    title: "🫂 Open When You Need a Hug",
+    text: `Come here. 🤗
+
+I know I can't magically appear beside you right now, so this will have to do.
+
+Imagine me giving you the biggest hug and not letting go for a little longer than necessary.
+
+You don't have to say anything.
+
+You don't have to explain what's wrong.
+
+Just breathe.
+
+Whatever is bothering you right now will eventually pass.
+
+And until it does, remember that there's someone out here who cares about you more than you probably realize.
+
+Consider yourself hugged. ❤️`
+},
+
+{
+    title: "😔 Open When You're Having a Bad Day",
+    text: `Hey, bad-day girl. ❤️
+
+First of all, you're allowed to have bad days.
+
+You don't have to be happy all the time. You don't have to pretend everything is okay when it isn't.
+
+Take a breath. Get some water. Eat something. Rest for a while.
+
+And remember something important:
+
+One bad day doesn't mean you have a bad life.
+
+Tomorrow can be different.
+
+And if you need someone to listen, complain to, cry to, or simply distract you with stupid conversations...
+
+You already know who to call. ❤️`
+},
+
+{
+    title: "😡 Open When You're Angry With Me",
+    text: `Okay...
+
+Before you do anything...
+
+PLEASE DON'T BLOCK ME. 😂
+
+I know there are going to be times when I annoy you, misunderstand you, say the wrong thing, or behave like an idiot.
+
+And sometimes you might be completely right.
+
+So if you're angry with me, I'm not going to tell you to "calm down."
+
+I'm just going to say:
+
+I'm sorry if I hurt you.
+
+Let's talk when you're ready.
+
+I'd rather have one difficult conversation with you than let something small create distance between us.
+
+And yes...
+
+You can be angry.
+
+I'll still love you. ❤️`
+},
+
+{
+    title: "🌙 Open When You Can't Sleep",
+    text: `Still awake?
+
+Of course you are. 😂
+
+It's probably late, you're scrolling through your phone, and somehow you ended up here.
+
+So here's your instruction:
+
+Put your phone down.
+
+Close your eyes.
+
+Take a deep breath.
+
+And imagine we're lying somewhere together, talking about absolutely nothing until one of us falls asleep.
+
+And if you're still awake after that...
+
+Well, congratulations.
+
+You've successfully wasted another few minutes reading this. 😂❤️
+
+Goodnight, sleepyhead.`
+},
+
+{
+    title: "🥺 Open When You Feel Like Giving Up",
+    text: `Hey.
+
+Stop for a second.
+
+Whatever you're dealing with right now, don't make a permanent decision based on a temporary feeling.
+
+You don't have to solve everything today.
+
+Take it one step at a time.
+
+You are capable of more than you think you are, and you've already made it through things you once thought you couldn't.
+
+So rest if you need to.
+
+Cry if you need to.
+
+Take a break if you need to.
+
+But don't give up on yourself.
+
+And when you feel ready, take one more step.
+
+I'll be cheering for you. ❤️`
+},
+
+{
+    title: "❤️ Open When You Want to Know Why I Love You",
+    text: `Do you really want the answer?
+
+Because honestly, I don't think there's just one reason.
+
+I love the way you make ordinary moments feel special.
+
+I love your little habits.
+
+I love your smile.
+
+I love the way you talk about things you're excited about.
+
+I love our stupid conversations.
+
+I love the memories we've created.
+
+But most importantly...
+
+I love who I am when I'm with you.
+
+I don't love you because you're perfect.
+
+I love you because you're you.
+
+And somehow, out of all the people in this huge world...
+
+I got lucky enough to find you. ❤️`
+},
+
+{
+    title: "😂 Open When You Need to Smile",
+    text: `Congratulations.
+
+You have officially opened the emergency happiness department.
+
+Prescription:
+
+1 stupid smile
+2 minutes of thinking about me
+3 memories of us
+∞ amount of love
+
+Side effects may include:
+
+- Random smiling
+- Missing me
+- Wanting to annoy me
+- Checking your phone hoping I texted you 😂
+
+If none of these work...
+
+I'm afraid you'll have to call me.
+
+Yes, I'm prescribing myself as the treatment.
+
+You're welcome. 😌❤️`
+},
+
+{
+    title: "📸 Open When You Want to Remember Us",
+    text: `Go look at our photos.
+
+Not just the perfect ones.
+
+Look at the blurry ones.
+
+The weird ones.
+
+The ones where we're laughing.
+
+The ones where neither of us was prepared.
+
+Because those are the moments I love the most.
+
+Someday we'll look back at these pictures and realize we were living through moments we'd eventually miss.
+
+So let's keep making memories.
+
+More pictures.
+
+More random plans.
+
+More stupid jokes.
+
+More adventures.
+
+More us. ❤️`
+},
+
+{
+    title: "💍 Open When You Wonder About Our Future",
+    text: `I don't know exactly what our future looks like.
+
+And honestly, I don't want to pretend I know.
+
+Maybe we'll travel to places we've never seen.
+
+Maybe we'll accomplish things we haven't even dreamed about yet.
+
+Maybe life will surprise us.
+
+But there's one thing I know.
+
+I want to keep making memories with you.
+
+I want more ordinary days with you.
+
+More conversations.
+
+More laughter.
+
+More arguments that we'll eventually laugh about.
+
+More moments where I look at you and think,
+
+"Yep. She's still my favourite person."
+
+Whatever the future brings...
+
+I hope there's a lot of us in it. ❤️`
+}
+
+];
+
+
+function openMessage(index) {
+
+    document.getElementById("messageTitle").innerText =
+        messages[index].title;
+
+    document.getElementById("messageText").innerText =
+        messages[index].text;
+
+    document.getElementById("messageModal").style.display =
+        "flex";
+}
+
+
+function closeMessage() {
+
+    document.getElementById("messageModal").style.display =
+        "none";
+}
+
+
+window.onclick = function(event) {
+
+    const modal =
+        document.getElementById("messageModal");
+
+    if (event.target === modal) {
+        closeMessage();
+    }
+
+}
+
+</script>
+
+</body>
+</html>
+```
