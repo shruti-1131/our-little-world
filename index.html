@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,42 +19,80 @@ html {
 }
 
 body {
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: Georgia, 'Times New Roman', serif;
     background: #fff7fa;
-    color: #492631;
+    color: #4a3038;
+    overflow-x: hidden;
 }
 
 /* =========================
-   NAVIGATION
+   FLOATING HEARTS
+========================= */
+
+.hearts-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.heart {
+    position: absolute;
+    bottom: -50px;
+    font-size: 20px;
+    opacity: 0;
+    animation: floatHeart linear forwards;
+}
+
+@keyframes floatHeart {
+
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.7;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+
+}
+
+/* =========================
+   NAVBAR
 ========================= */
 
 nav {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 999;
-
-    background: rgba(255, 247, 250, 0.92);
+    background: rgba(255,247,250,0.92);
     backdrop-filter: blur(10px);
-
-    border-bottom: 1px solid rgba(120,40,70,0.08);
-
-    padding: 14px 10px;
-
+    padding: 15px 20px;
     text-align: center;
+    z-index: 1000;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
 }
 
 nav a {
+    margin: 0 12px;
     text-decoration: none;
-    color: #693646;
-
-    margin: 0 10px;
-
-    font-size: 13px;
+    color: #9d536c;
+    font-size: 14px;
+    transition: 0.3s;
 }
 
 nav a:hover {
-    color: #c94f75;
+    color: #d85b7a;
 }
 
 /* =========================
@@ -64,170 +101,156 @@ nav a:hover {
 
 .hero {
     min-height: 100vh;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     text-align: center;
-
     padding: 100px 20px 60px;
-
-    background:
-        radial-gradient(circle at top, #ffe2ec, transparent 55%),
-        linear-gradient(135deg, #fff7fa, #ffeaf1);
+    position: relative;
+    z-index: 2;
 }
 
 .hero-content {
-    max-width: 700px;
+    max-width: 750px;
 }
 
-.big-heart {
+.hero-heart {
     font-size: 70px;
-
-    animation: heartbeat 1.7s infinite;
+    animation: heartbeat 1.8s infinite;
+    display: inline-block;
 }
 
 @keyframes heartbeat {
 
-    0%,100% {
+    0%, 100% {
         transform: scale(1);
     }
 
-    50% {
+    15% {
         transform: scale(1.15);
+    }
+
+    30% {
+        transform: scale(1);
+    }
+
+    45% {
+        transform: scale(1.1);
     }
 
 }
 
 .hero h1 {
-    font-size: 52px;
+    font-size: clamp(42px, 8vw, 76px);
+    color: #b84d6b;
     margin: 20px 0;
 }
 
 .hero p {
-    font-size: 19px;
-    line-height: 1.8;
+    font-size: 20px;
+    min-height: 30px;
 }
 
-.hero-small {
-    margin-top: 20px;
-
-    font-size: 15px !important;
-
-    opacity: 0.7;
-}
-
-.scroll-button {
+.start-btn {
     display: inline-block;
-
     margin-top: 35px;
-
-    padding: 13px 25px;
-
-    border-radius: 30px;
-
-    background: #71384a;
+    padding: 15px 30px;
+    background: #b84d6b;
     color: white;
-
     text-decoration: none;
-
+    border-radius: 30px;
     transition: 0.3s;
+    box-shadow: 0 8px 25px rgba(184,77,107,0.25);
 }
 
-.scroll-button:hover {
-    transform: translateY(-3px);
+.start-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(184,77,107,0.35);
 }
 
 /* =========================
-   GENERAL SECTIONS
+   SECTIONS
 ========================= */
 
 section {
-    padding: 80px 20px;
-}
-
-.section-container {
-    max-width: 950px;
+    padding: 100px 20px;
+    max-width: 1100px;
     margin: auto;
+    position: relative;
+    z-index: 2;
 }
 
 .section-title {
     text-align: center;
-
-    font-size: 36px;
-
-    margin-bottom: 15px;
+    font-size: 38px;
+    color: #a84763;
+    margin-bottom: 50px;
 }
 
-.section-subtitle {
-    text-align: center;
+/* =========================
+   SCROLL REVEAL
+========================= */
 
-    max-width: 650px;
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1s ease, transform 1s ease;
+}
 
-    margin: 0 auto 40px;
-
-    line-height: 1.8;
-
-    opacity: 0.75;
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* =========================
    OPEN WHEN
 ========================= */
 
-.open-section {
-    background: #fff;
-}
-
-.cards {
+.open-grid {
     display: grid;
-
-    grid-template-columns: repeat(2, 1fr);
-
-    gap: 18px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
 }
 
-.card {
-    background: #fff8fb;
-
-    border: 1px solid #f2d9e1;
-
-    border-radius: 22px;
-
-    padding: 25px 18px;
-
+.open-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px 20px;
     text-align: center;
-
     cursor: pointer;
-
-    transition: 0.3s;
-
-    box-shadow: 0 8px 25px rgba(90,30,50,0.06);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+    transition: all 0.35s ease;
+    position: relative;
+    overflow: hidden;
 }
 
-.card:hover {
-    transform: translateY(-6px);
-
-    box-shadow: 0 15px 35px rgba(90,30,50,0.12);
+.open-card::before {
+    content: "♥";
+    position: absolute;
+    font-size: 80px;
+    opacity: 0;
+    top: -20px;
+    right: -10px;
+    transition: 0.4s;
 }
 
-.card-icon {
-    font-size: 35px;
-
-    margin-bottom: 12px;
+.open-card:hover {
+    transform: translateY(-10px) rotate(1deg);
+    box-shadow: 0 18px 35px rgba(184,77,107,0.18);
 }
 
-.card h3 {
-    font-size: 17px;
+.open-card:hover::before {
+    opacity: 0.05;
 }
 
-.tap {
-    margin-top: 9px;
+.open-card span {
+    font-size: 40px;
+    display: block;
+    margin-bottom: 15px;
+}
 
-    font-size: 12px;
-
-    opacity: 0.55;
+.open-card h3 {
+    color: #a84763;
 }
 
 /* =========================
@@ -235,242 +258,186 @@ section {
 ========================= */
 
 .modal {
-    display: none;
-
     position: fixed;
-
     inset: 0;
-
-    z-index: 2000;
-
-    background: rgba(45,15,25,0.7);
-
-    padding: 20px;
-
+    background: rgba(55,25,35,0.7);
+    display: none;
     align-items: center;
-
     justify-content: center;
+    padding: 20px;
+    z-index: 2000;
+    backdrop-filter: blur(6px);
 }
 
-.modal-content {
-    background: #fff9fb;
-
-    max-width: 650px;
-
-    width: 100%;
-
-    max-height: 85vh;
-
-    overflow-y: auto;
-
-    border-radius: 25px;
-
-    padding: 40px 30px;
-
-    position: relative;
-
-    animation: modalAppear 0.3s ease;
+.modal.show {
+    display: flex;
+    animation: fadeIn 0.4s ease;
 }
 
-@keyframes modalAppear {
+@keyframes fadeIn {
 
     from {
         opacity: 0;
-        transform: translateY(25px) scale(.96);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0) scale(1);
     }
 
 }
 
-.close {
-    position: absolute;
-
-    right: 20px;
-
-    top: 12px;
-
-    font-size: 30px;
-
-    cursor: pointer;
+.modal-content {
+    background: #fffafb;
+    max-width: 600px;
+    width: 100%;
+    padding: 45px 30px;
+    border-radius: 25px;
+    text-align: center;
+    position: relative;
+    animation: modalOpen 0.6s cubic-bezier(.17,.67,.35,1.3);
 }
 
-.modal h2 {
-    text-align: center;
+@keyframes modalOpen {
 
+    from {
+        transform: scale(0.5) rotate(-5deg);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1) rotate(0);
+        opacity: 1;
+    }
+
+}
+
+.modal-content h2 {
+    color: #b84d6b;
     margin-bottom: 25px;
 }
 
-.message {
-    line-height: 1.9;
+.modal-content p {
+    font-size: 18px;
+    line-height: 1.8;
+}
 
-    white-space: pre-line;
+.close-btn {
+    position: absolute;
+    right: 18px;
+    top: 12px;
+    border: none;
+    background: none;
+    font-size: 30px;
+    cursor: pointer;
+    color: #9d536c;
 }
 
 /* =========================
-   OUR STORY
+   STORY
 ========================= */
 
-.story-section {
-    background: #fff0f5;
-}
-
 .timeline {
-    max-width: 700px;
-
+    max-width: 750px;
     margin: auto;
 }
 
 .timeline-item {
-    position: relative;
+    background: white;
+    padding: 30px;
+    margin: 25px 0;
+    border-radius: 18px;
+    box-shadow: 0 7px 25px rgba(0,0,0,0.05);
+    border-left: 5px solid #d87a95;
+}
 
-    padding: 25px 25px 25px 35px;
-
-    margin-bottom: 20px;
-
-    background: rgba(255,255,255,0.75);
-
-    border-radius: 20px;
-
-    border-left: 4px solid #b95773;
+.timeline-item small {
+    color: #b84d6b;
+    font-weight: bold;
+    letter-spacing: 2px;
 }
 
 .timeline-item h3 {
-    margin-bottom: 8px;
-}
-
-.timeline-date {
-    font-size: 13px;
-
-    opacity: 0.6;
-
-    margin-bottom: 8px;
+    margin: 10px 0;
 }
 
 /* =========================
-   MEMORIES
+   MEMORY PLACEHOLDERS
 ========================= */
-
-.memories-section {
-    background: #fff;
-}
 
 .gallery {
     display: grid;
-
-    grid-template-columns: repeat(3, 1fr);
-
-    gap: 18px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 25px;
 }
 
 .photo-card {
-    background: #fff8fb;
+    background: white;
+    padding: 12px;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transition: 0.4s;
+}
 
-    border-radius: 20px;
-
-    overflow: hidden;
-
-    border: 1px solid #f2d9e1;
-
-    box-shadow: 0 8px 25px rgba(90,30,50,0.06);
+.photo-card:hover {
+    transform: translateY(-10px) rotate(1deg);
 }
 
 .photo-placeholder {
-    height: 220px;
-
-    background: linear-gradient(
-        135deg,
-        #f8dce5,
-        #fcecf2
-    );
-
+    height: 230px;
+    background: #f8e7ed;
+    border-radius: 7px;
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
-    font-size: 45px;
+    font-size: 50px;
 }
 
-.photo-caption {
-    padding: 15px;
-
+.photo-card p {
     text-align: center;
-
-    line-height: 1.5;
+    padding: 15px 5px 8px;
 }
 
 /* =========================
    FUTURE LETTER
 ========================= */
 
-.future-section {
-    background:
-        linear-gradient(
-            135deg,
-            #4d2634,
-            #71384a
-        );
-
-    color: white;
-}
-
-.letter {
-    max-width: 700px;
-
+.future-letter {
+    max-width: 750px;
     margin: auto;
-
-    background: rgba(255,255,255,0.09);
-
-    border: 1px solid rgba(255,255,255,0.15);
-
-    border-radius: 25px;
-
-    padding: 35px;
-
+    background: #fff;
+    padding: 45px;
+    border-radius: 20px;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.07);
     line-height: 1.9;
+    font-size: 18px;
+    position: relative;
 }
 
-.letter-title {
-    text-align: center;
-
-    margin-bottom: 25px;
-
-    font-size: 28px;
+.future-letter::before {
+    content: "💌";
+    position: absolute;
+    font-size: 45px;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 /* =========================
    SONG
 ========================= */
 
-.song-section {
-    text-align: center;
-
-    background: #fff0f5;
-}
-
 .song-box {
-    max-width: 550px;
-
-    margin: auto;
-
+    text-align: center;
     background: white;
-
+    padding: 50px 20px;
     border-radius: 25px;
-
-    padding: 35px 25px;
-
-    box-shadow: 0 10px 30px rgba(90,30,50,0.08);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
 }
 
-.song-icon {
-    font-size: 50px;
-
-    margin-bottom: 15px;
+.music-heart {
+    font-size: 55px;
+    animation: heartbeat 2s infinite;
+    display: inline-block;
 }
 
 /* =========================
@@ -479,58 +446,98 @@ section {
 
 .final-section {
     text-align: center;
-
-    min-height: 70vh;
-
+    min-height: 80vh;
     display: flex;
-
-    align-items: center;
-
+    flex-direction: column;
     justify-content: center;
-
-    background: #fff;
+    align-items: center;
 }
 
-.final-content {
-    max-width: 650px;
-}
-
-.final-content h2 {
-    font-size: 38px;
-
-    margin-bottom: 20px;
-}
-
-.final-button {
-    margin-top: 30px;
-
-    padding: 15px 30px;
-
+.surprise-btn {
     border: none;
-
-    border-radius: 30px;
-
-    background: #71384a;
-
+    background: #b84d6b;
     color: white;
-
-    font-size: 16px;
-
+    padding: 18px 35px;
+    border-radius: 35px;
+    font-size: 18px;
     cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 8px 30px rgba(184,77,107,0.3);
+}
+
+.surprise-btn:hover {
+    transform: scale(1.08);
 }
 
 .secret {
     display: none;
+    margin-top: 40px;
+    max-width: 700px;
+}
 
-    margin-top: 30px;
+.secret.show {
+    display: block;
+    animation: secretReveal 2s ease forwards;
+}
 
-    padding: 30px;
+@keyframes secretReveal {
 
-    background: #fff0f5;
+    0% {
+        opacity: 0;
+        transform: scale(0.7);
+    }
 
-    border-radius: 22px;
+    60% {
+        transform: scale(1.05);
+    }
 
-    line-height: 1.9;
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
+
+.secret-heart {
+    font-size: 90px;
+    animation: heartbeat 1.5s infinite;
+}
+
+.secret h2 {
+    font-size: clamp(32px, 7vw, 60px);
+    color: #b84d6b;
+    margin: 20px 0;
+}
+
+.secret p {
+    font-size: 20px;
+    line-height: 1.8;
+}
+
+/* =========================
+   CLICK HEART
+========================= */
+
+.click-heart {
+    position: fixed;
+    pointer-events: none;
+    font-size: 22px;
+    z-index: 9999;
+    animation: clickHeart 1s ease forwards;
+}
+
+@keyframes clickHeart {
+
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-70px) scale(1.5);
+    }
+
 }
 
 /* =========================
@@ -539,56 +546,37 @@ section {
 
 footer {
     text-align: center;
-
-    padding: 35px 20px;
-
-    background: #4d2634;
-
-    color: white;
-
-    line-height: 1.8;
+    padding: 40px 20px;
+    color: #9d536c;
 }
 
 /* =========================
    MOBILE
 ========================= */
 
-@media(max-width: 650px) {
+@media (max-width: 600px) {
 
     nav {
         overflow-x: auto;
-
         white-space: nowrap;
+        text-align: left;
     }
 
     nav a {
         margin: 0 7px;
-
         font-size: 12px;
     }
 
-    .hero h1 {
-        font-size: 36px;
+    section {
+        padding: 80px 18px;
     }
 
-    .hero p {
-        font-size: 17px;
+    .future-letter {
+        padding: 30px 20px;
     }
 
-    .cards {
-        grid-template-columns: 1fr;
-    }
-
-    .gallery {
-        grid-template-columns: 1fr;
-    }
-
-    .section-title {
-        font-size: 30px;
-    }
-
-    .letter {
-        padding: 25px 20px;
+    .hero-heart {
+        font-size: 55px;
     }
 
 }
@@ -596,62 +584,43 @@ footer {
 </style>
 </head>
 
-
 <body>
 
+<!-- FLOATING HEARTS -->
+<div class="hearts-container" id="hearts"></div>
 
-<!-- =========================
-     NAVIGATION
-========================= -->
+<!-- NAVIGATION -->
 
 <nav>
-
-<a href="#home">Home</a>
-
-<a href="#open">Open When</a>
-
-<a href="#story">Our Story</a>
-
-<a href="#memories">Memories</a>
-
-<a href="#future">Future</a>
-
-<a href="#song">Song</a>
-
+    <a href="#home">Home</a>
+    <a href="#open">Open When</a>
+    <a href="#story">Our Story</a>
+    <a href="#memories">Memories</a>
+    <a href="#future">Future</a>
+    <a href="#song">Our Song</a>
+    <a href="#final">❤️</a>
 </nav>
 
 
 <!-- =========================
-     HOME
+     HERO
 ========================= -->
 
-<section class="hero" id="home">
+<section id="home" class="hero">
 
-<div class="hero-content">
+    <div class="hero-content">
 
-<div class="big-heart">
-❤️
-</div>
+        <div class="hero-heart">❤️</div>
 
-<h1>Our Little World</h1>
+        <h1>Our Little World</h1>
 
-<p>
-I could have bought you something...
-<br>
-but I wanted to make something
-that exists only for you.
-</p>
+        <p id="typing"></p>
 
-<p class="hero-small">
-A little collection of memories,
-words and moments that remind me of you.
-</p>
+        <a href="#open" class="start-btn">
+            Start Here 💕
+        </a>
 
-<a href="#open" class="scroll-button">
-Start Here ❤️
-</a>
-
-</div>
+    </div>
 
 </section>
 
@@ -660,94 +629,65 @@ Start Here ❤️
      OPEN WHEN
 ========================= -->
 
-<section class="open-section" id="open">
+<section id="open" class="reveal">
 
-<div class="section-container">
+    <h2 class="section-title">
+        Open When... 💌
+    </h2>
 
-<h2 class="section-title">
-💌 Open When...
-</h2>
+    <div class="open-grid">
 
-<p class="section-subtitle">
-You don't have to open them all at once.
-Save them for the moments when you need them.
-</p>
+        <div class="open-card" onclick="openMessage(0)">
+            <span>💭</span>
+            <h3>You Miss Me</h3>
+        </div>
 
+        <div class="open-card" onclick="openMessage(1)">
+            <span>🤗</span>
+            <h3>You Need a Hug</h3>
+        </div>
 
-<div class="cards">
+        <div class="open-card" onclick="openMessage(2)">
+            <span>🌧️</span>
+            <h3>You're Having a Bad Day</h3>
+        </div>
 
-<div class="card" onclick="openMessage(0)">
-<div class="card-icon">🥺</div>
-<h3>You Miss Me</h3>
-<div class="tap">Tap to open</div>
-</div>
+        <div class="open-card" onclick="openMessage(3)">
+            <span>😤</span>
+            <h3>You're Angry With Me</h3>
+        </div>
 
+        <div class="open-card" onclick="openMessage(4)">
+            <span>🌙</span>
+            <h3>You Can't Sleep</h3>
+        </div>
 
-<div class="card" onclick="openMessage(1)">
-<div class="card-icon">🫂</div>
-<h3>You Need a Hug</h3>
-<div class="tap">Tap to open</div>
-</div>
+        <div class="open-card" onclick="openMessage(5)">
+            <span>🌱</span>
+            <h3>You Feel Like Giving Up</h3>
+        </div>
 
+        <div class="open-card" onclick="openMessage(6)">
+            <span>❤️</span>
+            <h3>You Wonder Why I Love You</h3>
+        </div>
 
-<div class="card" onclick="openMessage(2)">
-<div class="card-icon">😔</div>
-<h3>You're Having a Bad Day</h3>
-<div class="tap">Tap to open</div>
-</div>
+        <div class="open-card" onclick="openMessage(7)">
+            <span>😊</span>
+            <h3>You Need to Smile</h3>
+        </div>
 
+        <div class="open-card" onclick="openMessage(8)">
+            <span>📸</span>
+            <h3>You Want to Remember Us</h3>
+        </div>
 
-<div class="card" onclick="openMessage(3)">
-<div class="card-icon">😡</div>
-<h3>You're Angry With Me</h3>
-<div class="tap">Tap to open</div>
-</div>
+        <div class="open-card" onclick="openMessage(9)">
+            <span>🔮</span>
+            <h3>You Wonder About Our Future</h3>
+        </div>
 
-
-<div class="card" onclick="openMessage(4)">
-<div class="card-icon">🌙</div>
-<h3>You Can't Sleep</h3>
-<div class="tap">Tap to open</div>
-</div>
-
-
-<div class="card" onclick="openMessage(5)">
-<div class="card-icon">🥺</div>
-<h3>You Feel Like Giving Up</h3>
-<div class="tap">Tap to open</div>
-</div>
-
-
-<div class="card" onclick="openMessage(6)">
-<div class="card-icon">❤️</div>
-<h3>You Want to Know Why I Love You</h3>
-<div class="tap">Tap to open</div>
-</div>
-
-
-<div class="card" onclick="openMessage(7)">
-<div class="card-icon">😂</div>
-<h3>You Need to Smile</h3>
-<div class="tap">Tap to open</div>
-</div>
-
-
-<div class="card" onclick="openMessage(8)">
-<div class="card-icon">📸</div>
-<h3>You Want to Remember Us</h3>
-<div class="tap">Tap to open</div>
-</div>
-
-
-<div class="card" onclick="openMessage(9)">
-<div class="card-icon">💍</div>
-<h3>You Wonder About Our Future</h3>
-<div class="tap">Tap to open</div>
-</div>
-
-</div>
-
-</div>
+    </div>
 
 </section>
 
@@ -756,90 +696,52 @@ Save them for the moments when you need them.
      OUR STORY
 ========================= -->
 
-<section class="story-section" id="story">
+<section id="story" class="reveal">
 
-<div class="section-container">
+    <h2 class="section-title">
+        Our Story ❤️
+    </h2>
 
-<h2 class="section-title">
-📖 Our Story
-</h2>
+    <div class="timeline">
 
-<p class="section-subtitle">
-Some stories are written in books.
-Ours is written in little moments.
-</p>
+        <div class="timeline-item">
+            <small>THE BEGINNING</small>
+            <h3>Where It All Started ❤️</h3>
+            <p>
+                This is where our story began...
+                and somehow it became one of my favourite stories.
+            </p>
+        </div>
 
+        <div class="timeline-item">
+            <small>FIRST MEMORY</small>
+            <h3>Our First Special Moment</h3>
+            <p>
+                One of those moments that seemed small at the time,
+                but became something I'll always remember.
+            </p>
+        </div>
 
-<div class="timeline">
+        <div class="timeline-item">
+            <small>A MOMENT I REMEMBER</small>
+            <h3>That One Day...</h3>
+            <p>
+                There are certain moments that stay with you.
+                This is one of mine.
+            </p>
+        </div>
 
+        <div class="timeline-item">
+            <small>TODAY ❤️</small>
+            <h3>And Here We Are</h3>
+            <p>
+                Still making memories.
+                Still laughing.
+                Still choosing each other.
+            </p>
+        </div>
 
-<div class="timeline-item">
-
-<div class="timeline-date">
-THE BEGINNING
-</div>
-
-<h3>Where It All Started ❤️</h3>
-
-<p>
-This is where we'll write about how we met
-and the beginning of our story.
-</p>
-
-</div>
-
-
-<div class="timeline-item">
-
-<div class="timeline-date">
-FIRST MEMORY
-</div>
-
-<h3>Our First Special Moment</h3>
-
-<p>
-Add your favourite early memory here.
-Something that still makes you smile.
-</p>
-
-</div>
-
-
-<div class="timeline-item">
-
-<div class="timeline-date">
-A MOMENT I REMEMBER</div>
-
-<h3>That One Day...</h3>
-
-<p>
-Add one of those moments that might seem
-small to everyone else but means a lot to us.
-</p>
-
-</div>
-
-
-<div class="timeline-item">
-
-<div class="timeline-date">
-TODAY ❤️
-</div>
-
-<h3>And Here We Are</h3>
-
-<p>
-Our story isn't finished.
-
-There are still so many chapters left to write.
-</p>
-
-</div>
-
-
-</div>
-
-</div>
+    </div>
 
 </section>
 
@@ -848,104 +750,45 @@ There are still so many chapters left to write.
      MEMORIES
 ========================= -->
 
-<section class="memories-section" id="memories">
+<section id="memories" class="reveal">
 
-<div class="section-container">
+    <h2 class="section-title">
+        Our Memories 📸
+    </h2>
 
-<h2 class="section-title">
-📸 Our Memories
-</h2>
+    <div class="gallery">
 
-<p class="section-subtitle">
-These are placeholders for now.
-We'll replace them with our actual pictures later.
-</p>
+        <div class="photo-card">
+            <div class="photo-placeholder">📷</div>
+            <p>Our first favourite picture</p>
+        </div>
 
+        <div class="photo-card">
+            <div class="photo-placeholder">📷</div>
+            <p>A memory I'll never forget</p>
+        </div>
 
-<div class="gallery">
+        <div class="photo-card">
+            <div class="photo-placeholder">📷</div>
+            <p>One of my favourite days with you</p>
+        </div>
 
+        <div class="photo-card">
+            <div class="photo-placeholder">📷</div>
+            <p>That smile ❤️</p>
+        </div>
 
-<div class="photo-card">
+        <div class="photo-card">
+            <div class="photo-placeholder">📷</div>
+            <p>One for the memory book</p>
+        </div>
 
-<div class="photo-placeholder">
-📷
-</div>
+        <div class="photo-card">
+            <div class="photo-placeholder">📷</div>
+            <p>More memories coming...</p>
+        </div>
 
-<div class="photo-caption">
-Our first favourite picture
-</div>
-
-</div>
-
-
-<div class="photo-card">
-
-<div class="photo-placeholder">
-📷
-</div>
-
-<div class="photo-caption">
-A memory I'll never forget
-</div>
-
-</div>
-
-
-<div class="photo-card">
-
-<div class="photo-placeholder">
-📷
-</div>
-
-<div class="photo-caption">
-One of my favourite days with you
-</div>
-
-</div>
-
-
-<div class="photo-card">
-
-<div class="photo-placeholder">
-📷
-</div>
-
-<div class="photo-caption">
-That smile ❤️
-</div>
-
-</div>
-
-
-<div class="photo-card">
-
-<div class="photo-placeholder">
-📷
-</div>
-
-<div class="photo-caption">
-One for the memory book
-</div>
-
-</div>
-
-
-<div class="photo-card">
-
-<div class="photo-placeholder">
-📷
-</div>
-
-<div class="photo-caption">
-More memories coming...
-</div>
-
-</div>
-
-
-</div>
-
-</div>
+    </div>
 
 </section>
 
@@ -954,202 +797,92 @@ More memories coming...
      FUTURE LETTER
 ========================= -->
 
-<section class="future-section" id="future">
+<section id="future" class="reveal">
 
-<div class="section-container">
+    <h2 class="section-title">
+        A Letter From Our Future 💌
+    </h2>
 
-<h2 class="section-title">
-🕰️ A Letter From Future Me
-</h2>
+    <div class="future-letter">
 
-<p class="section-subtitle">
-To be opened whenever you wonder where we're going.
-</p>
+        <p>
+            <strong>September 9, 2031</strong>
+        </p>
 
+        <br>
 
-<div class="letter">
+        <p>
+            Hey you,
+        </p>
 
-<div class="letter-title">
-September 9, 2031 ❤️
-</div>
+        <br>
 
+        <p>
+            I wonder if you're reading this beside me
+            or if we're looking back at this together.
+        </p>
 
-<p>
-Hey you ❤️
-</p>
+        <br>
 
-<br>
+        <p>
+            I hope we've travelled somewhere beautiful.
+            I hope we've laughed until our stomachs hurt.
+            I hope we've collected hundreds of little memories.
+        </p>
 
-<p>
-If you're reading this, I hope you're still the same
-person who can make me smile without even trying.
-</p>
+        <br>
 
-<br>
+        <p>
+            And most importantly,
+            I hope I still look at you the same way.
+        </p>
 
-<p>
-I don't know exactly what our life looks like five
-years from now.
+        <br>
 
-Maybe things turned out completely differently
-from what I imagined.
-</p>
+        <p>
+            With a ridiculous smile.
+        </p>
 
-<br>
+        <br>
 
-<p>
-Maybe we've travelled to places we haven't even
-heard of yet.
+        <p>
+            Love,
+            <br>
+            Me ❤️
+        </p>
 
-Maybe we're sitting somewhere together,
-arguing about something ridiculously unimportant.
-</p>
-
-<br>
-
-<p>
-But I hope one thing hasn't changed.
-</p>
-
-<br>
-
-<p>
-I still look at you sometimes and think,
-"How did I get this lucky?"
-</p>
-
-<br>
-
-<p>
-I hope we've collected hundreds of little memories
-by now — the silly ones, the difficult ones,
-the spontaneous ones, and the completely
-ordinary days that somehow became my favourites.
-</p>
-
-<br>
-
-<p>
-I don't want a perfect story with you.
-</p>
-
-<br>
-
-<p>
-I want <strong>our</strong> story.
-</p>
-
-<br>
-
-<p>
-The messy conversations.
-The stupid jokes.
-The random calls.
-The annoying habits.
-The hugs after an argument.
-The moments where neither of us says anything
-but somehow everything feels okay.
-</p>
-
-<br>
-
-<p>
-And if I could go back to September 9, 2026
-and tell myself one thing, it would be:
-</p>
-
-<br>
-
-<p>
-<strong>
-Don't take her for granted.
-Appreciate the little things.
-And keep choosing her.
-</strong>
-</p>
-
-<br>
-
-<p>
-So wherever we are when you're reading this...
-</p>
-
-<br>
-
-<p>
-I hope I'm still annoying you.
-</p>
-
-<p>
-I hope you're still stealing my attention.
-</p>
-
-<p>
-And I hope, after all these years,
-you're still my favourite person.
-</p>
-
-<br>
-
-<p>
-<strong>
-Love,<br>
-Me — five years later ❤️
-</strong>
-</p>
-
-</div>
-
-</div>
+    </div>
 
 </section>
 
 
 <!-- =========================
-     OUR SONG
+     SONG
 ========================= -->
 
-<section class="song-section" id="song">
+<section id="song" class="reveal">
 
-<div class="section-container">
+    <h2 class="section-title">
+        Our Song 🎵
+    </h2>
 
-<h2 class="section-title">
-🎵 Our Song
-</h2>
+    <div class="song-box">
 
-<p class="section-subtitle">
-Every story needs a soundtrack.
-</p>
+        <div class="music-heart">
+            🎵❤️🎵
+        </div>
 
+        <br><br>
 
-<div class="song-box">
+        <h3>Our Song Goes Here</h3>
 
-<div class="song-icon">
-🎧
-</div>
+        <br>
 
-<h3>
-Our Song
-</h3>
+        <p>
+            Add your favourite song here later.
+        </p>
 
-<br>
-
-<p>
-This is where we'll add the song
-that reminds me of you.
-</p>
-
-<br>
-
-<p>
-<strong>
-Song coming soon ❤️
-</strong>
-</p>
-
-</div>
-
-</div>
+    </div>
 
 </section>
 
@@ -1158,104 +891,112 @@ Song coming soon ❤️
      FINAL SURPRISE
 ========================= -->
 
-<section class="final-section">
+<section id="final" class="final-section reveal">
 
-<div class="final-content">
+    <h2 class="section-title">
+        One Last Thing...
+    </h2>
 
-<h2>
-🔐 One Last Thing...
-</h2>
+    <button class="surprise-btn" onclick="showSecret()">
+        Don't Click This ❤️
+    </button>
 
-<p>
-You've reached the end.
+    <div class="secret" id="secret">
 
-But I saved one thing
-for the very end.
-</p>
+        <div class="secret-heart">
+            ❤️
+        </div>
 
+        <h2>Surprise.</h2>
 
-<button class="final-button"
-onclick="showSecret()">
+        <p>
+            If you reached this far...
+        </p>
 
-Open Your Surprise ❤️
+        <br>
 
-</button>
+        <p>
+            Out of all the things I could have given you,
+            I wanted to give you something that took time,
+            thought and a little piece of me.
+        </p>
 
+        <br>
 
-<div class="secret" id="secretMessage">
+        <p>
+            This website isn't really the gift.
+        </p>
 
-<p>
-If you reached this far,
-there's something I want you to know.
-</p>
+        <br>
 
-<br>
+        <p>
+            <strong>You are.</strong>
+        </p>
 
-<p>
-Out of all the things I could have given you,
-I wanted to give you something that took time,
-thought and a little piece of me.
-</p>
+        <br>
 
-<br>
+        <p>
+            And I'd choose you again. ❤️
+        </p>
 
-<p>
-This website isn't really the gift.
-</p>
-
-<p>
-<strong>
-You are.
-</strong>
-</p>
-
-<br>
-
-<p>
-And I'd choose you again.
-❤️
-</p>
-
-</div>
-
-</div>
+    </div>
 
 </section>
 
 
 <footer>
-
-Made with ❤️ especially for you.
-
-<br>
-
-Our story is still being written...
-
+    Made with a little bit of code and a lot of ❤️
 </footer>
 
 
 <!-- =========================
-     MESSAGE MODAL
+     MODAL
 ========================= -->
 
 <div class="modal" id="messageModal">
 
-<div class="modal-content">
+    <div class="modal-content">
 
-<span class="close"
-onclick="closeMessage()">×</span>
+        <button class="close-btn" onclick="closeMessage()">
+            ×
+        </button>
 
-<h2 id="messageTitle"></h2>
+        <h2 id="modalTitle"></h2>
 
-<div class="message"
-id="messageText"></div>
+        <p id="modalMessage"></p>
 
-</div>
+    </div>
 
 </div>
 
 
 <script>
+
+/* =========================
+   TYPING EFFECT
+========================= */
+
+const text =
+"Somewhere between all the ordinary days, we created something extraordinary.";
+
+let typingIndex = 0;
+
+function typeText() {
+
+    if (typingIndex < text.length) {
+
+        document.getElementById("typing").innerHTML +=
+            text.charAt(typingIndex);
+
+        typingIndex++;
+
+        setTimeout(typeText, 45);
+
+    }
+
+}
+
+typeText();
 
 
 /* =========================
@@ -1265,347 +1006,207 @@ id="messageText"></div>
 const messages = [
 
 {
-title: "🥺 Open When You Miss Me",
-
-text: `Hey you ❤️
-
-If you're reading this, I guess you miss me.
-
-Well… I miss you too. Probably more than I'll admit.
-
-Close your eyes for a second and imagine I'm right there beside you, annoying you, making you laugh, and probably asking, "Why are you looking at me like that?" 😂
-
-Until I can actually be there, consider this a tiny virtual hug from me.
-
-And remember — distance doesn't change the fact that you're my person.
-
-Now stop missing me and come talk to me. ❤️`
+title: "Open When You Miss Me ❤️",
+message:
+"Close your eyes for a second. Imagine me sitting right beside you, probably annoying you somehow. Distance can make things feel difficult, but it can't change how much you mean to me. Until I can give you a real hug, consider this a tiny digital one. 🤗❤️"
 },
 
-
 {
-title: "🫂 Open When You Need a Hug",
-
-text: `Come here. 🤗
-
-I know I can't magically appear beside you right now, so this will have to do.
-
-Imagine me giving you the biggest hug and not letting go for a little longer than necessary.
-
-You don't have to say anything.
-
-You don't have to explain what's wrong.
-
-Just breathe.
-
-Whatever is bothering you right now will eventually pass.
-
-And until it does, remember that there's someone out here who cares about you more than you probably realize.
-
-Consider yourself hugged. ❤️`
+title: "Open When You Need a Hug 🤗",
+message:
+"If I could teleport to you right now, I would. No talking, no explanations. Just one long hug. So until science finally figures that out, imagine my arms around you and remember that you're never alone. ❤️"
 },
 
-
 {
-title: "😔 Open When You're Having a Bad Day",
-
-text: `Hey, bad-day girl. ❤️
-
-First of all, you're allowed to have bad days.
-
-You don't have to be happy all the time.
-
-You don't have to pretend everything is okay when it isn't.
-
-Take a breath.
-
-Get some water.
-
-Eat something.
-
-Rest for a while.
-
-And remember something important:
-
-One bad day doesn't mean you have a bad life.
-
-Tomorrow can be different.
-
-And if you need someone to listen, complain to, cry to, or simply distract you with stupid conversations...
-
-You already know who to call. ❤️`
+title: "Open When You're Having a Bad Day 🌧️",
+message:
+"Today might be terrible, but today is only one day. You don't have to have everything figured out. Take a breath. Drink some water. Rest if you need to. Tomorrow gets another chance. And so do you. ❤️"
 },
 
-
 {
-title: "😡 Open When You're Angry With Me",
-
-text: `Okay...
-
-Before you do anything...
-
-PLEASE DON'T BLOCK ME. 😂
-
-I know there are going to be times when I annoy you, misunderstand you, say the wrong thing, or behave like an idiot.
-
-And sometimes you might be completely right.
-
-So if you're angry with me, I'm not going to tell you to "calm down."
-
-I'm just going to say:
-
-I'm sorry if I hurt you.
-
-Let's talk when you're ready.
-
-I'd rather have one difficult conversation with you than let something small create distance between us.
-
-And yes...
-
-You can be angry.
-
-I'll still love you. ❤️`
+title: "Open When You're Angry With Me 😤",
+message:
+"Okay... first of all, I'm probably going to let you be angry because you have every right to feel what you feel. But when you're ready, come back to me. I don't want winning an argument. I want us. ❤️"
 },
 
-
 {
-title: "🌙 Open When You Can't Sleep",
-
-text: `Still awake?
-
-Of course you are. 😂
-
-It's probably late, you're scrolling through your phone, and somehow you ended up here.
-
-So here's your instruction:
-
-Put your phone down.
-
-Close your eyes.
-
-Take a deep breath.
-
-And imagine we're lying somewhere together, talking about absolutely nothing until one of us falls asleep.
-
-And if you're still awake after that...
-
-Well, congratulations.
-
-You've successfully wasted another few minutes reading this. 😂❤️
-
-Goodnight, sleepyhead.`
+title: "Open When You Can't Sleep 🌙",
+message:
+"Put your phone down after reading this. Close your eyes. Imagine a quiet night where we're just talking about absolutely nothing. Maybe eventually one of us falls asleep mid-conversation. Sleep well, beautiful. ❤️"
 },
 
-
 {
-title: "🥺 Open When You Feel Like Giving Up",
-
-text: `Hey.
-
-Stop for a second.
-
-Whatever you're dealing with right now, don't make a permanent decision based on a temporary feeling.
-
-You don't have to solve everything today.
-
-Take it one step at a time.
-
-You are capable of more than you think you are.
-
-So rest if you need to.
-
-Cry if you need to.
-
-Take a break if you need to.
-
-But don't give up on yourself.
-
-And when you're ready, take one more step.
-
-I'll be cheering for you. ❤️`
+title: "Open When You Feel Like Giving Up 🌱",
+message:
+"You've made it through every difficult day you've faced so far. That's something. You don't need to solve everything tonight. Just take the next small step. And if you need someone beside you while you do it, I'm here. ❤️"
 },
 
-
 {
-title: "❤️ Open When You Want to Know Why I Love You",
-
-text: `Do you really want the answer?
-
-Because honestly, I don't think there's just one reason.
-
-I love the way you make ordinary moments feel special.
-
-I love your little habits.
-
-I love your smile.
-
-I love the way you talk about things you're excited about.
-
-I love our stupid conversations.
-
-I love the memories we've created.
-
-But most importantly...
-
-I love who I am when I'm with you.
-
-I don't love you because you're perfect.
-
-I love you because you're you.
-
-And somehow, out of all the people in this huge world...
-
-I got lucky enough to find you. ❤️`
+title: "Open When You Wonder Why I Love You ❤️",
+message:
+"I could make a list, but I'd probably never finish it. I love your smile, your little habits, your way of making ordinary moments special, and the person I get to be when I'm with you. Most importantly, I love you because you're you."
 },
 
-
 {
-title: "😂 Open When You Need to Smile",
-
-text: `Congratulations.
-
-You have officially opened the emergency happiness department.
-
-Prescription:
-
-1 stupid smile
-2 minutes of thinking about me
-3 memories of us
-∞ amount of love
-
-Side effects may include:
-
-- Random smiling
-- Missing me
-- Wanting to annoy me
-- Checking your phone hoping I texted you 😂
-
-If none of these work...
-
-I'm afraid you'll have to call me.
-
-Yes, I'm prescribing myself as the treatment.
-
-You're welcome. 😌❤️`
+title: "Open When You Need to Smile 😊",
+message:
+"Congratulations. You have officially been ordered to smile. 😌 If that didn't work, imagine me doing something ridiculously embarrassing just to make you laugh. You're welcome. 😂❤️"
 },
 
-
 {
-title: "📸 Open When You Want to Remember Us",
-
-text: `Go look at our photos.
-
-Not just the perfect ones.
-
-Look at the blurry ones.
-
-The weird ones.
-
-The ones where we're laughing.
-
-The ones where neither of us was prepared.
-
-Because those are the moments I love the most.
-
-Someday we'll look back at these pictures and realize we were living through moments we'd eventually miss.
-
-So let's keep making memories.
-
-More pictures.
-
-More random plans.
-
-More stupid jokes.
-
-More adventures.
-
-More us. ❤️`
+title: "Open When You Want to Remember Us 📸",
+message:
+"Remember the little moments. The random conversations. The stupid jokes. The unexpected laughs. The days that didn't seem important at the time. Those are the moments that slowly became our story."
 },
 
-
 {
-title: "💍 Open When You Wonder About Our Future",
-
-text: `I don't know exactly what our future looks like.
-
-And honestly, I don't want to pretend I know.
-
-Maybe we'll travel to places we've never seen.
-
-Maybe we'll accomplish things we haven't even dreamed about yet.
-
-Maybe life will surprise us.
-
-But there's one thing I know.
-
-I want to keep making memories with you.
-
-I want more ordinary days with you.
-
-More conversations.
-
-More laughter.
-
-More arguments that we'll eventually laugh about.
-
-More moments where I look at you and think,
-
-"Yep. She's still my favourite person."
-
-Whatever the future brings...
-
-I hope there's a lot of us in it. ❤️`
+title: "Open When You Wonder About Our Future 🔮",
+message:
+"I don't know exactly what the future looks like. But I know who I'd like beside me while we discover it. More adventures, more arguments about silly things, more laughter, more memories, and hopefully a whole lot more us. ❤️"
 }
 
 ];
 
 
-/* =========================
-   OPEN MESSAGE
-========================= */
-
 function openMessage(index) {
 
-document.getElementById("messageTitle").innerText =
-messages[index].title;
+    document.getElementById("modalTitle").innerText =
+        messages[index].title;
 
-document.getElementById("messageText").innerText =
-messages[index].text;
+    document.getElementById("modalMessage").innerText =
+        messages[index].message;
 
-document.getElementById("messageModal").style.display =
-"flex";
+    document.getElementById("messageModal")
+        .classList.add("show");
 
 }
 
-
-/* =========================
-   CLOSE MESSAGE
-========================= */
 
 function closeMessage() {
 
-document.getElementById("messageModal").style.display =
-"none";
+    document.getElementById("messageModal")
+        .classList.remove("show");
 
 }
+
+
+/* Close modal when clicking outside */
+
+document.getElementById("messageModal")
+.addEventListener("click", function(e) {
+
+    if (e.target === this) {
+        closeMessage();
+    }
+
+});
 
 
 /* =========================
-   CLICK OUTSIDE MODAL
+   SCROLL REVEAL
 ========================= */
 
-window.onclick = function(event) {
+const revealElements =
+document.querySelectorAll(".reveal");
 
-const modal =
-document.getElementById("messageModal");
+const observer =
+new IntersectionObserver(
 
-if(event.target === modal) {
+(entries) => {
 
-closeMessage();
+    entries.forEach(entry => {
+
+        if (entry.isIntersecting) {
+
+            entry.target.classList.add("active");
+
+        }
+
+    });
+
+},
+
+{
+    threshold: 0.15
+}
+
+);
+
+revealElements.forEach(
+element => observer.observe(element)
+);
+
+
+/* =========================
+   FLOATING HEARTS
+========================= */
+
+function createHeart() {
+
+    const heart =
+    document.createElement("div");
+
+    heart.className = "heart";
+
+    const hearts = ["❤️","💕","💗","💖","💘"];
+
+    heart.innerText =
+        hearts[Math.floor(Math.random() * hearts.length)];
+
+    heart.style.left =
+        Math.random() * 100 + "%";
+
+    heart.style.fontSize =
+        (12 + Math.random() * 20) + "px";
+
+    heart.style.animationDuration =
+        (6 + Math.random() * 7) + "s";
+
+    document
+        .getElementById("hearts")
+        .appendChild(heart);
+
+    setTimeout(() => {
+
+        heart.remove();
+
+    }, 14000);
 
 }
 
-}
+setInterval(createHeart, 1200);
+
+
+/* =========================
+   CLICK HEART EFFECT
+========================= */
+
+document.addEventListener("click", function(e) {
+
+    const heart =
+        document.createElement("div");
+
+    heart.className = "click-heart";
+
+    heart.innerText =
+        ["❤️","💕","💗","✨"]
+        [Math.floor(Math.random() * 4)];
+
+    heart.style.left =
+        e.clientX + "px";
+
+    heart.style.top =
+        e.clientY + "px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+
+        heart.remove();
+
+    }, 1000);
+
+});
 
 
 /* =========================
@@ -1614,14 +1215,25 @@ closeMessage();
 
 function showSecret() {
 
-document.getElementById("secretMessage").style.display =
-"block";
+    const secret =
+        document.getElementById("secret");
+
+    secret.classList.add("show");
+
+    document.querySelector(".surprise-btn")
+        .style.display = "none";
+
+    /* Create lots of hearts */
+
+    for (let i = 0; i < 35; i++) {
+
+        setTimeout(createHeart, i * 80);
+
+    }
 
 }
 
 </script>
 
-
 </body>
 </html>
-```
