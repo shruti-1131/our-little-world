@@ -2,361 +2,1272 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Our Little World ❤️</title>
+<title>Our Little World ❤️</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+<style>
 
-        body {
-            font-family: Georgia, 'Times New Roman', serif;
-            background: linear-gradient(135deg, #fff0f5, #ffe4ec, #fff7fa);
-            color: #4a2632;
-            min-height: 100vh;
-        }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-        .container {
-            max-width: 900px;
-            margin: auto;
-            padding: 25px 18px 60px;
-        }
+html {
+    scroll-behavior: smooth;
+}
 
-        /* HERO */
+body {
+    font-family: Georgia, "Times New Roman", serif;
+    background: #fff7fa;
+    color: #492631;
+}
 
-        .hero {
-            text-align: center;
-            padding: 70px 20px 50px;
-        }
+/* =========================
+   NAVIGATION
+========================= */
 
-        .heart {
-            font-size: 55px;
-            animation: heartbeat 1.5s infinite;
-        }
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
 
-        @keyframes heartbeat {
-            0%, 100% {
-                transform: scale(1);
-            }
+    background: rgba(255, 247, 250, 0.92);
+    backdrop-filter: blur(10px);
 
-            50% {
-                transform: scale(1.15);
-            }
-        }
+    border-bottom: 1px solid rgba(120,40,70,0.08);
 
-        .hero h1 {
-            font-size: 42px;
-            margin: 20px 0 12px;
-        }
+    padding: 14px 10px;
 
-        .hero p {
-            font-size: 18px;
-            line-height: 1.7;
-            max-width: 600px;
-            margin: auto;
-        }
+    text-align: center;
+}
 
-        .subtitle {
-            margin-top: 15px;
-            font-style: italic;
-            opacity: 0.8;
-        }
+nav a {
+    text-decoration: none;
+    color: #693646;
 
-        /* SECTION */
+    margin: 0 10px;
 
-        .section {
-            margin-top: 35px;
-        }
+    font-size: 13px;
+}
 
-        .section-title {
-            text-align: center;
-            font-size: 30px;
-            margin-bottom: 25px;
-        }
+nav a:hover {
+    color: #c94f75;
+}
 
-        .section-description {
-            text-align: center;
-            margin-bottom: 30px;
-            line-height: 1.7;
-        }
+/* =========================
+   HERO
+========================= */
 
-        /* CARDS */
+.hero {
+    min-height: 100vh;
 
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 18px;
-        }
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-        .card {
-            background: rgba(255, 255, 255, 0.85);
-            border-radius: 20px;
-            padding: 25px 20px;
-            text-align: center;
-            cursor: pointer;
-            border: 1px solid rgba(180, 80, 110, 0.15);
-            box-shadow: 0 8px 25px rgba(120, 40, 70, 0.08);
-            transition: all 0.3s ease;
-        }
+    text-align: center;
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(120, 40, 70, 0.15);
-        }
+    padding: 100px 20px 60px;
 
-        .card-icon {
-            font-size: 35px;
-            margin-bottom: 12px;
-        }
+    background:
+        radial-gradient(circle at top, #ffe2ec, transparent 55%),
+        linear-gradient(135deg, #fff7fa, #ffeaf1);
+}
 
-        .card h3 {
-            font-size: 18px;
-        }
+.hero-content {
+    max-width: 700px;
+}
 
-        .tap {
-            margin-top: 10px;
-            font-size: 12px;
-            opacity: 0.6;
-        }
+.big-heart {
+    font-size: 70px;
 
-        /* MESSAGE MODAL */
+    animation: heartbeat 1.7s infinite;
+}
 
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            inset: 0;
-            background: rgba(45, 15, 25, 0.65);
-            padding: 20px;
-            align-items: center;
-            justify-content: center;
-        }
+@keyframes heartbeat {
 
-        .modal-content {
-            background: #fff8fb;
-            max-width: 650px;
-            width: 100%;
-            max-height: 85vh;
-            overflow-y: auto;
-            border-radius: 25px;
-            padding: 35px 28px;
-            position: relative;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.25);
-            animation: appear 0.3s ease;
-        }
+    0%,100% {
+        transform: scale(1);
+    }
 
-        @keyframes appear {
-            from {
-                opacity: 0;
-                transform: translateY(25px) scale(0.97);
-            }
+    50% {
+        transform: scale(1.15);
+    }
 
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
+}
 
-        .close {
-            position: absolute;
-            right: 18px;
-            top: 12px;
-            font-size: 28px;
-            cursor: pointer;
-        }
+.hero h1 {
+    font-size: 52px;
+    margin: 20px 0;
+}
 
-        .modal h2 {
-            text-align: center;
-            margin-bottom: 25px;
-            font-size: 26px;
-        }
+.hero p {
+    font-size: 19px;
+    line-height: 1.8;
+}
 
-        .message {
-            line-height: 1.9;
-            font-size: 16px;
-            white-space: pre-line;
-        }
+.hero-small {
+    margin-top: 20px;
 
-        /* FOOTER */
+    font-size: 15px !important;
 
-        footer {
-            text-align: center;
-            margin-top: 70px;
-            opacity: 0.7;
-            line-height: 1.7;
-        }
+    opacity: 0.7;
+}
 
-        /* MOBILE */
+.scroll-button {
+    display: inline-block;
 
-        @media (max-width: 600px) {
+    margin-top: 35px;
 
-            .hero {
-                padding-top: 45px;
-            }
+    padding: 13px 25px;
 
-            .hero h1 {
-                font-size: 32px;
-            }
+    border-radius: 30px;
 
-            .cards {
-                grid-template-columns: 1fr;
-            }
+    background: #71384a;
+    color: white;
 
-            .modal-content {
-                padding: 30px 22px;
-            }
-        }
-    </style>
+    text-decoration: none;
+
+    transition: 0.3s;
+}
+
+.scroll-button:hover {
+    transform: translateY(-3px);
+}
+
+/* =========================
+   GENERAL SECTIONS
+========================= */
+
+section {
+    padding: 80px 20px;
+}
+
+.section-container {
+    max-width: 950px;
+    margin: auto;
+}
+
+.section-title {
+    text-align: center;
+
+    font-size: 36px;
+
+    margin-bottom: 15px;
+}
+
+.section-subtitle {
+    text-align: center;
+
+    max-width: 650px;
+
+    margin: 0 auto 40px;
+
+    line-height: 1.8;
+
+    opacity: 0.75;
+}
+
+/* =========================
+   OPEN WHEN
+========================= */
+
+.open-section {
+    background: #fff;
+}
+
+.cards {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 18px;
+}
+
+.card {
+    background: #fff8fb;
+
+    border: 1px solid #f2d9e1;
+
+    border-radius: 22px;
+
+    padding: 25px 18px;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+    box-shadow: 0 8px 25px rgba(90,30,50,0.06);
+}
+
+.card:hover {
+    transform: translateY(-6px);
+
+    box-shadow: 0 15px 35px rgba(90,30,50,0.12);
+}
+
+.card-icon {
+    font-size: 35px;
+
+    margin-bottom: 12px;
+}
+
+.card h3 {
+    font-size: 17px;
+}
+
+.tap {
+    margin-top: 9px;
+
+    font-size: 12px;
+
+    opacity: 0.55;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal {
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 2000;
+
+    background: rgba(45,15,25,0.7);
+
+    padding: 20px;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+.modal-content {
+    background: #fff9fb;
+
+    max-width: 650px;
+
+    width: 100%;
+
+    max-height: 85vh;
+
+    overflow-y: auto;
+
+    border-radius: 25px;
+
+    padding: 40px 30px;
+
+    position: relative;
+
+    animation: modalAppear 0.3s ease;
+}
+
+@keyframes modalAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(25px) scale(.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+.close {
+    position: absolute;
+
+    right: 20px;
+
+    top: 12px;
+
+    font-size: 30px;
+
+    cursor: pointer;
+}
+
+.modal h2 {
+    text-align: center;
+
+    margin-bottom: 25px;
+}
+
+.message {
+    line-height: 1.9;
+
+    white-space: pre-line;
+}
+
+/* =========================
+   OUR STORY
+========================= */
+
+.story-section {
+    background: #fff0f5;
+}
+
+.timeline {
+    max-width: 700px;
+
+    margin: auto;
+}
+
+.timeline-item {
+    position: relative;
+
+    padding: 25px 25px 25px 35px;
+
+    margin-bottom: 20px;
+
+    background: rgba(255,255,255,0.75);
+
+    border-radius: 20px;
+
+    border-left: 4px solid #b95773;
+}
+
+.timeline-item h3 {
+    margin-bottom: 8px;
+}
+
+.timeline-date {
+    font-size: 13px;
+
+    opacity: 0.6;
+
+    margin-bottom: 8px;
+}
+
+/* =========================
+   MEMORIES
+========================= */
+
+.memories-section {
+    background: #fff;
+}
+
+.gallery {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 18px;
+}
+
+.photo-card {
+    background: #fff8fb;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    border: 1px solid #f2d9e1;
+
+    box-shadow: 0 8px 25px rgba(90,30,50,0.06);
+}
+
+.photo-placeholder {
+    height: 220px;
+
+    background: linear-gradient(
+        135deg,
+        #f8dce5,
+        #fcecf2
+    );
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 45px;
+}
+
+.photo-caption {
+    padding: 15px;
+
+    text-align: center;
+
+    line-height: 1.5;
+}
+
+/* =========================
+   FUTURE LETTER
+========================= */
+
+.future-section {
+    background:
+        linear-gradient(
+            135deg,
+            #4d2634,
+            #71384a
+        );
+
+    color: white;
+}
+
+.letter {
+    max-width: 700px;
+
+    margin: auto;
+
+    background: rgba(255,255,255,0.09);
+
+    border: 1px solid rgba(255,255,255,0.15);
+
+    border-radius: 25px;
+
+    padding: 35px;
+
+    line-height: 1.9;
+}
+
+.letter-title {
+    text-align: center;
+
+    margin-bottom: 25px;
+
+    font-size: 28px;
+}
+
+/* =========================
+   SONG
+========================= */
+
+.song-section {
+    text-align: center;
+
+    background: #fff0f5;
+}
+
+.song-box {
+    max-width: 550px;
+
+    margin: auto;
+
+    background: white;
+
+    border-radius: 25px;
+
+    padding: 35px 25px;
+
+    box-shadow: 0 10px 30px rgba(90,30,50,0.08);
+}
+
+.song-icon {
+    font-size: 50px;
+
+    margin-bottom: 15px;
+}
+
+/* =========================
+   FINAL SURPRISE
+========================= */
+
+.final-section {
+    text-align: center;
+
+    min-height: 70vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #fff;
+}
+
+.final-content {
+    max-width: 650px;
+}
+
+.final-content h2 {
+    font-size: 38px;
+
+    margin-bottom: 20px;
+}
+
+.final-button {
+    margin-top: 30px;
+
+    padding: 15px 30px;
+
+    border: none;
+
+    border-radius: 30px;
+
+    background: #71384a;
+
+    color: white;
+
+    font-size: 16px;
+
+    cursor: pointer;
+}
+
+.secret {
+    display: none;
+
+    margin-top: 30px;
+
+    padding: 30px;
+
+    background: #fff0f5;
+
+    border-radius: 22px;
+
+    line-height: 1.9;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    text-align: center;
+
+    padding: 35px 20px;
+
+    background: #4d2634;
+
+    color: white;
+
+    line-height: 1.8;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width: 650px) {
+
+    nav {
+        overflow-x: auto;
+
+        white-space: nowrap;
+    }
+
+    nav a {
+        margin: 0 7px;
+
+        font-size: 12px;
+    }
+
+    .hero h1 {
+        font-size: 36px;
+    }
+
+    .hero p {
+        font-size: 17px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .section-title {
+        font-size: 30px;
+    }
+
+    .letter {
+        padding: 25px 20px;
+    }
+
+}
+
+</style>
 </head>
+
 
 <body>
 
-<div class="container">
 
-    <!-- HERO -->
+<!-- =========================
+     NAVIGATION
+========================= -->
 
-    <section class="hero">
+<nav>
 
-        <div class="heart">❤️</div>
+<a href="#home">Home</a>
 
-        <h1>Our Little World</h1>
+<a href="#open">Open When</a>
 
-        <p>
-            I could have bought you something...
-            but I wanted to make something that exists
-            only for you.
-        </p>
+<a href="#story">Our Story</a>
 
-        <p class="subtitle">
-            So here's a little piece of my heart.
-        </p>
+<a href="#memories">Memories</a>
 
-    </section>
+<a href="#future">Future</a>
 
+<a href="#song">Song</a>
 
-    <!-- OPEN WHEN -->
-
-    <section class="section">
-
-        <h2 class="section-title">
-            💌 Open When...
-        </h2>
-
-        <p class="section-description">
-            You don't have to open them all at once.
-            Save them for the moments when you need them. ❤️
-        </p>
+</nav>
 
 
-        <div class="cards">
+<!-- =========================
+     HOME
+========================= -->
 
-            <div class="card" onclick="openMessage(0)">
-                <div class="card-icon">🥺</div>
-                <h3>You Miss Me</h3>
-                <div class="tap">Tap to open</div>
-            </div>
+<section class="hero" id="home">
 
-            <div class="card" onclick="openMessage(1)">
-                <div class="card-icon">🫂</div>
-                <h3>You Need a Hug</h3>
-                <div class="tap">Tap to open</div>
-            </div>
+<div class="hero-content">
 
-            <div class="card" onclick="openMessage(2)">
-                <div class="card-icon">😔</div>
-                <h3>You're Having a Bad Day</h3>
-                <div class="tap">Tap to open</div>
-            </div>
+<div class="big-heart">
+❤️
+</div>
 
-            <div class="card" onclick="openMessage(3)">
-                <div class="card-icon">😡</div>
-                <h3>You're Angry With Me</h3>
-                <div class="tap">Tap to open</div>
-            </div>
+<h1>Our Little World</h1>
 
-            <div class="card" onclick="openMessage(4)">
-                <div class="card-icon">🌙</div>
-                <h3>You Can't Sleep</h3>
-                <div class="tap">Tap to open</div>
-            </div>
+<p>
+I could have bought you something...
+<br>
+but I wanted to make something
+that exists only for you.
+</p>
 
-            <div class="card" onclick="openMessage(5)">
-                <div class="card-icon">🥺</div>
-                <h3>You Feel Like Giving Up</h3>
-                <div class="tap">Tap to open</div>
-            </div>
+<p class="hero-small">
+A little collection of memories,
+words and moments that remind me of you.
+</p>
 
-            <div class="card" onclick="openMessage(6)">
-                <div class="card-icon">❤️</div>
-                <h3>You Want to Know Why I Love You</h3>
-                <div class="tap">Tap to open</div>
-            </div>
+<a href="#open" class="scroll-button">
+Start Here ❤️
+</a>
 
-            <div class="card" onclick="openMessage(7)">
-                <div class="card-icon">😂</div>
-                <h3>You Need to Smile</h3>
-                <div class="tap">Tap to open</div>
-            </div>
+</div>
 
-            <div class="card" onclick="openMessage(8)">
-                <div class="card-icon">📸</div>
-                <h3>You Want to Remember Us</h3>
-                <div class="tap">Tap to open</div>
-            </div>
-
-            <div class="card" onclick="openMessage(9)">
-                <div class="card-icon">💍</div>
-                <h3>You Wonder About Our Future</h3>
-                <div class="tap">Tap to open</div>
-            </div>
-
-        </div>
-
-    </section>
+</section>
 
 
-    <footer>
+<!-- =========================
+     OPEN WHEN
+========================= -->
 
-        Made with ❤️, especially for you.
+<section class="open-section" id="open">
 
-        <br>
+<div class="section-container">
 
-        <span>More memories coming soon...</span>
+<h2 class="section-title">
+💌 Open When...
+</h2>
 
-    </footer>
+<p class="section-subtitle">
+You don't have to open them all at once.
+Save them for the moments when you need them.
+</p>
+
+
+<div class="cards">
+
+<div class="card" onclick="openMessage(0)">
+<div class="card-icon">🥺</div>
+<h3>You Miss Me</h3>
+<div class="tap">Tap to open</div>
+</div>
+
+
+<div class="card" onclick="openMessage(1)">
+<div class="card-icon">🫂</div>
+<h3>You Need a Hug</h3>
+<div class="tap">Tap to open</div>
+</div>
+
+
+<div class="card" onclick="openMessage(2)">
+<div class="card-icon">😔</div>
+<h3>You're Having a Bad Day</h3>
+<div class="tap">Tap to open</div>
+</div>
+
+
+<div class="card" onclick="openMessage(3)">
+<div class="card-icon">😡</div>
+<h3>You're Angry With Me</h3>
+<div class="tap">Tap to open</div>
+</div>
+
+
+<div class="card" onclick="openMessage(4)">
+<div class="card-icon">🌙</div>
+<h3>You Can't Sleep</h3>
+<div class="tap">Tap to open</div>
+</div>
+
+
+<div class="card" onclick="openMessage(5)">
+<div class="card-icon">🥺</div>
+<h3>You Feel Like Giving Up</h3>
+<div class="tap">Tap to open</div>
+</div>
+
+
+<div class="card" onclick="openMessage(6)">
+<div class="card-icon">❤️</div>
+<h3>You Want to Know Why I Love You</h3>
+<div class="tap">Tap to open</div>
+</div>
+
+
+<div class="card" onclick="openMessage(7)">
+<div class="card-icon">😂</div>
+<h3>You Need to Smile</h3>
+<div class="tap">Tap to open</div>
+</div>
+
+
+<div class="card" onclick="openMessage(8)">
+<div class="card-icon">📸</div>
+<h3>You Want to Remember Us</h3>
+<div class="tap">Tap to open</div>
+</div>
+
+
+<div class="card" onclick="openMessage(9)">
+<div class="card-icon">💍</div>
+<h3>You Wonder About Our Future</h3>
+<div class="tap">Tap to open</div>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     OUR STORY
+========================= -->
+
+<section class="story-section" id="story">
+
+<div class="section-container">
+
+<h2 class="section-title">
+📖 Our Story
+</h2>
+
+<p class="section-subtitle">
+Some stories are written in books.
+Ours is written in little moments.
+</p>
+
+
+<div class="timeline">
+
+
+<div class="timeline-item">
+
+<div class="timeline-date">
+THE BEGINNING
+</div>
+
+<h3>Where It All Started ❤️</h3>
+
+<p>
+This is where we'll write about how we met
+and the beginning of our story.
+</p>
 
 </div>
 
 
-<!-- MESSAGE MODAL -->
+<div class="timeline-item">
+
+<div class="timeline-date">
+FIRST MEMORY
+</div>
+
+<h3>Our First Special Moment</h3>
+
+<p>
+Add your favourite early memory here.
+Something that still makes you smile.
+</p>
+
+</div>
+
+
+<div class="timeline-item">
+
+<div class="timeline-date">
+A MOMENT I REMEMBER</div>
+
+<h3>That One Day...</h3>
+
+<p>
+Add one of those moments that might seem
+small to everyone else but means a lot to us.
+</p>
+
+</div>
+
+
+<div class="timeline-item">
+
+<div class="timeline-date">
+TODAY ❤️
+</div>
+
+<h3>And Here We Are</h3>
+
+<p>
+Our story isn't finished.
+
+There are still so many chapters left to write.
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     MEMORIES
+========================= -->
+
+<section class="memories-section" id="memories">
+
+<div class="section-container">
+
+<h2 class="section-title">
+📸 Our Memories
+</h2>
+
+<p class="section-subtitle">
+These are placeholders for now.
+We'll replace them with our actual pictures later.
+</p>
+
+
+<div class="gallery">
+
+
+<div class="photo-card">
+
+<div class="photo-placeholder">
+📷
+</div>
+
+<div class="photo-caption">
+Our first favourite picture
+</div>
+
+</div>
+
+
+<div class="photo-card">
+
+<div class="photo-placeholder">
+📷
+</div>
+
+<div class="photo-caption">
+A memory I'll never forget
+</div>
+
+</div>
+
+
+<div class="photo-card">
+
+<div class="photo-placeholder">
+📷
+</div>
+
+<div class="photo-caption">
+One of my favourite days with you
+</div>
+
+</div>
+
+
+<div class="photo-card">
+
+<div class="photo-placeholder">
+📷
+</div>
+
+<div class="photo-caption">
+That smile ❤️
+</div>
+
+</div>
+
+
+<div class="photo-card">
+
+<div class="photo-placeholder">
+📷
+</div>
+
+<div class="photo-caption">
+One for the memory book
+</div>
+
+</div>
+
+
+<div class="photo-card">
+
+<div class="photo-placeholder">
+📷
+</div>
+
+<div class="photo-caption">
+More memories coming...
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     FUTURE LETTER
+========================= -->
+
+<section class="future-section" id="future">
+
+<div class="section-container">
+
+<h2 class="section-title">
+🕰️ A Letter From Future Me
+</h2>
+
+<p class="section-subtitle">
+To be opened whenever you wonder where we're going.
+</p>
+
+
+<div class="letter">
+
+<div class="letter-title">
+September 9, 2031 ❤️
+</div>
+
+
+<p>
+Hey you ❤️
+</p>
+
+<br>
+
+<p>
+If you're reading this, I hope you're still the same
+person who can make me smile without even trying.
+</p>
+
+<br>
+
+<p>
+I don't know exactly what our life looks like five
+years from now.
+
+Maybe things turned out completely differently
+from what I imagined.
+</p>
+
+<br>
+
+<p>
+Maybe we've travelled to places we haven't even
+heard of yet.
+
+Maybe we're sitting somewhere together,
+arguing about something ridiculously unimportant.
+</p>
+
+<br>
+
+<p>
+But I hope one thing hasn't changed.
+</p>
+
+<br>
+
+<p>
+I still look at you sometimes and think,
+"How did I get this lucky?"
+</p>
+
+<br>
+
+<p>
+I hope we've collected hundreds of little memories
+by now — the silly ones, the difficult ones,
+the spontaneous ones, and the completely
+ordinary days that somehow became my favourites.
+</p>
+
+<br>
+
+<p>
+I don't want a perfect story with you.
+</p>
+
+<br>
+
+<p>
+I want <strong>our</strong> story.
+</p>
+
+<br>
+
+<p>
+The messy conversations.
+The stupid jokes.
+The random calls.
+The annoying habits.
+The hugs after an argument.
+The moments where neither of us says anything
+but somehow everything feels okay.
+</p>
+
+<br>
+
+<p>
+And if I could go back to September 9, 2026
+and tell myself one thing, it would be:
+</p>
+
+<br>
+
+<p>
+<strong>
+Don't take her for granted.
+Appreciate the little things.
+And keep choosing her.
+</strong>
+</p>
+
+<br>
+
+<p>
+So wherever we are when you're reading this...
+</p>
+
+<br>
+
+<p>
+I hope I'm still annoying you.
+</p>
+
+<p>
+I hope you're still stealing my attention.
+</p>
+
+<p>
+And I hope, after all these years,
+you're still my favourite person.
+</p>
+
+<br>
+
+<p>
+<strong>
+Love,<br>
+Me — five years later ❤️
+</strong>
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     OUR SONG
+========================= -->
+
+<section class="song-section" id="song">
+
+<div class="section-container">
+
+<h2 class="section-title">
+🎵 Our Song
+</h2>
+
+<p class="section-subtitle">
+Every story needs a soundtrack.
+</p>
+
+
+<div class="song-box">
+
+<div class="song-icon">
+🎧
+</div>
+
+<h3>
+Our Song
+</h3>
+
+<br>
+
+<p>
+This is where we'll add the song
+that reminds me of you.
+</p>
+
+<br>
+
+<p>
+<strong>
+Song coming soon ❤️
+</strong>
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     FINAL SURPRISE
+========================= -->
+
+<section class="final-section">
+
+<div class="final-content">
+
+<h2>
+🔐 One Last Thing...
+</h2>
+
+<p>
+You've reached the end.
+
+But I saved one thing
+for the very end.
+</p>
+
+
+<button class="final-button"
+onclick="showSecret()">
+
+Open Your Surprise ❤️
+
+</button>
+
+
+<div class="secret" id="secretMessage">
+
+<p>
+If you reached this far,
+there's something I want you to know.
+</p>
+
+<br>
+
+<p>
+Out of all the things I could have given you,
+I wanted to give you something that took time,
+thought and a little piece of me.
+</p>
+
+<br>
+
+<p>
+This website isn't really the gift.
+</p>
+
+<p>
+<strong>
+You are.
+</strong>
+</p>
+
+<br>
+
+<p>
+And I'd choose you again.
+❤️
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<footer>
+
+Made with ❤️ especially for you.
+
+<br>
+
+Our story is still being written...
+
+</footer>
+
+
+<!-- =========================
+     MESSAGE MODAL
+========================= -->
 
 <div class="modal" id="messageModal">
 
-    <div class="modal-content">
+<div class="modal-content">
 
-        <span class="close" onclick="closeMessage()">×</span>
+<span class="close"
+onclick="closeMessage()">×</span>
 
-        <h2 id="messageTitle"></h2>
+<h2 id="messageTitle"></h2>
 
-        <div class="message" id="messageText"></div>
+<div class="message"
+id="messageText"></div>
 
-    </div>
+</div>
 
 </div>
 
 
 <script>
 
+
+/* =========================
+   OPEN WHEN MESSAGES
+========================= */
+
 const messages = [
 
 {
-    title: "🥺 Open When You Miss Me",
-    text: `Hey you ❤️
+title: "🥺 Open When You Miss Me",
+
+text: `Hey you ❤️
 
 If you're reading this, I guess you miss me.
 
@@ -371,9 +1282,11 @@ And remember — distance doesn't change the fact that you're my person.
 Now stop missing me and come talk to me. ❤️`
 },
 
+
 {
-    title: "🫂 Open When You Need a Hug",
-    text: `Come here. 🤗
+title: "🫂 Open When You Need a Hug",
+
+text: `Come here. 🤗
 
 I know I can't magically appear beside you right now, so this will have to do.
 
@@ -392,15 +1305,25 @@ And until it does, remember that there's someone out here who cares about you mo
 Consider yourself hugged. ❤️`
 },
 
+
 {
-    title: "😔 Open When You're Having a Bad Day",
-    text: `Hey, bad-day girl. ❤️
+title: "😔 Open When You're Having a Bad Day",
+
+text: `Hey, bad-day girl. ❤️
 
 First of all, you're allowed to have bad days.
 
-You don't have to be happy all the time. You don't have to pretend everything is okay when it isn't.
+You don't have to be happy all the time.
 
-Take a breath. Get some water. Eat something. Rest for a while.
+You don't have to pretend everything is okay when it isn't.
+
+Take a breath.
+
+Get some water.
+
+Eat something.
+
+Rest for a while.
 
 And remember something important:
 
@@ -413,9 +1336,11 @@ And if you need someone to listen, complain to, cry to, or simply distract you w
 You already know who to call. ❤️`
 },
 
+
 {
-    title: "😡 Open When You're Angry With Me",
-    text: `Okay...
+title: "😡 Open When You're Angry With Me",
+
+text: `Okay...
 
 Before you do anything...
 
@@ -442,9 +1367,11 @@ You can be angry.
 I'll still love you. ❤️`
 },
 
+
 {
-    title: "🌙 Open When You Can't Sleep",
-    text: `Still awake?
+title: "🌙 Open When You Can't Sleep",
+
+text: `Still awake?
 
 Of course you are. 😂
 
@@ -469,9 +1396,11 @@ You've successfully wasted another few minutes reading this. 😂❤️
 Goodnight, sleepyhead.`
 },
 
+
 {
-    title: "🥺 Open When You Feel Like Giving Up",
-    text: `Hey.
+title: "🥺 Open When You Feel Like Giving Up",
+
+text: `Hey.
 
 Stop for a second.
 
@@ -481,7 +1410,7 @@ You don't have to solve everything today.
 
 Take it one step at a time.
 
-You are capable of more than you think you are, and you've already made it through things you once thought you couldn't.
+You are capable of more than you think you are.
 
 So rest if you need to.
 
@@ -491,14 +1420,16 @@ Take a break if you need to.
 
 But don't give up on yourself.
 
-And when you feel ready, take one more step.
+And when you're ready, take one more step.
 
 I'll be cheering for you. ❤️`
 },
 
+
 {
-    title: "❤️ Open When You Want to Know Why I Love You",
-    text: `Do you really want the answer?
+title: "❤️ Open When You Want to Know Why I Love You",
+
+text: `Do you really want the answer?
 
 Because honestly, I don't think there's just one reason.
 
@@ -527,9 +1458,11 @@ And somehow, out of all the people in this huge world...
 I got lucky enough to find you. ❤️`
 },
 
+
 {
-    title: "😂 Open When You Need to Smile",
-    text: `Congratulations.
+title: "😂 Open When You Need to Smile",
+
+text: `Congratulations.
 
 You have officially opened the emergency happiness department.
 
@@ -556,9 +1489,11 @@ Yes, I'm prescribing myself as the treatment.
 You're welcome. 😌❤️`
 },
 
+
 {
-    title: "📸 Open When You Want to Remember Us",
-    text: `Go look at our photos.
+title: "📸 Open When You Want to Remember Us",
+
+text: `Go look at our photos.
 
 Not just the perfect ones.
 
@@ -587,9 +1522,11 @@ More adventures.
 More us. ❤️`
 },
 
+
 {
-    title: "💍 Open When You Wonder About Our Future",
-    text: `I don't know exactly what our future looks like.
+title: "💍 Open When You Wonder About Our Future",
+
+text: `I don't know exactly what our future looks like.
 
 And honestly, I don't want to pretend I know.
 
@@ -623,38 +1560,67 @@ I hope there's a lot of us in it. ❤️`
 ];
 
 
+/* =========================
+   OPEN MESSAGE
+========================= */
+
 function openMessage(index) {
 
-    document.getElementById("messageTitle").innerText =
-        messages[index].title;
+document.getElementById("messageTitle").innerText =
+messages[index].title;
 
-    document.getElementById("messageText").innerText =
-        messages[index].text;
+document.getElementById("messageText").innerText =
+messages[index].text;
 
-    document.getElementById("messageModal").style.display =
-        "flex";
+document.getElementById("messageModal").style.display =
+"flex";
+
 }
 
+
+/* =========================
+   CLOSE MESSAGE
+========================= */
 
 function closeMessage() {
 
-    document.getElementById("messageModal").style.display =
-        "none";
+document.getElementById("messageModal").style.display =
+"none";
+
 }
 
 
+/* =========================
+   CLICK OUTSIDE MODAL
+========================= */
+
 window.onclick = function(event) {
 
-    const modal =
-        document.getElementById("messageModal");
+const modal =
+document.getElementById("messageModal");
 
-    if (event.target === modal) {
-        closeMessage();
-    }
+if(event.target === modal) {
+
+closeMessage();
+
+}
+
+}
+
+
+/* =========================
+   FINAL SURPRISE
+========================= */
+
+function showSecret() {
+
+document.getElementById("secretMessage").style.display =
+"block";
 
 }
 
 </script>
+
 
 </body>
 </html>
